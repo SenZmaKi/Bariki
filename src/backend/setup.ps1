@@ -80,7 +80,7 @@ function CheckAndInstallTool {
 
 }
 
-function CheckPythonVersion {
+function CheckAndInstallPython {
     CommandExists $PY_COMMAND $true
     try {
 
@@ -100,7 +100,7 @@ function CheckPythonVersion {
 
 WriteGreen "Starting project setup.. ."
 WriteGreen "Verifying dev tools"
-CheckPythonVersion
+CheckAndInstallPython
 CheckAndInstallTool "git" (MakeWingetCommand "Git.Git")
 CheckAndInstallTool "docker" (MakeWingetCommand "Docker.DockerDesktop")
 CheckAndInstallTool "ubuntu" (MakeWingetCommand "Canonical.Ubuntu.2204")
