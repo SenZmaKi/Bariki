@@ -1,3 +1,3 @@
-#python>=3.11
+#python>=3.12
 beaker-pyteal==1.1.1
 algokit==2.0.2
