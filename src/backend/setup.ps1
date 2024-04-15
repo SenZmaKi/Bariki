@@ -1,3 +1,5 @@
+
+$PY_COMMAND = "py -3.12"
 function CommandExists {
     param (
         [Parameter(Mandatory=$true)]
@@ -68,7 +70,7 @@ function CheckAndInstallTool {
     )
 
     if (CommandExists $toolName) {
-        WriteGreen "$toolName is already installed."
+        WriteGreen "$toolName is already installed"
         return
       }
     WriteRed "$toolName is not installed."
@@ -79,13 +81,14 @@ function CheckAndInstallTool {
 }
 
 function CheckPythonVersion {
-    CommandExists $pyCommand $true
+    CommandExists $PY_COMMAND $true
     try {
 
-        $pythonVersion = Invoke-Expression "$pyCommand --version"
+        $pythonVersion = Invoke-Expression "$PY_COMMAND --version"
         if ($LASTEXITCODE -ne 0) {
             throw
           }
+        WriteGreen "Python 3.12 is already installed"
     } catch {
         WriteRed "Python 3.12 is not installed"
         WriteGreen "Installing Python 3.12..."
@@ -96,28 +99,26 @@ function CheckPythonVersion {
 
 
 WriteGreen "Starting project setup.. ."
-
-$pyCommand = "py -3.12"
-WriteGreen "Verifying python version"
+WriteGreen "Verifying dev tools"
 CheckPythonVersion
-
-
 CheckAndInstallTool "git" (MakeWingetCommand "Git.Git")
+CheckAndInstallTool "docker" (MakeWingetCommand "Docker.DockerDesktop")
+CheckAndInstallTool "ubuntu" (MakeWingetCommand "Canonical.Ubuntu.2204")
+
 WriteGreen "Cloning repo"
 RunAndExitOnFailure "git clone https://github.com/SenZmaKi/Bariki.git"
 
 Set-Location Bariki
 
-CheckAndInstallTool "docker" (MakeWingetCommand "Docker.DockerDesktop")
-
-CheckAndInstallTool "ubuntu" (MakeWingetCommand "Canonical.Ubuntu.2204")
 
 WriteGreen "Installing dependencies"
 Set-Location src/backend
-RunAndExitOnFailure "$pyCommand -m venv .venv"
+RunAndExitOnFailure "$PY_COMMAND -m venv .venv"
 RunAndExitOnFailure "./.venv/Scripts/activate.bat"
-RunAndExitOnFailure "$pyCommand -m pip install -r requirements.txt"
+RunAndExitOnFailure "$PY_COMMAND -m pip install -r requirements.txt"
 
-Write-Host "If you're having issues with ubuntu or docker make sure to enable virtualisation in your BIOS settings: https://support.microsoft.com/en-us/windows/enable-virtualization-on-windows-11-pcs-c5578302-6e43-4b4b-a449-8ced115f58e1"
-Write-Host "If you're having issues with algokit try: https://stackoverflow.com/a/66409838/17193072 "
+Write-Host ""
+Write-Host ""
+Write-Host "If you're having issues with ubuntu or docker make sure to enable virtualization in your BIOS settings: https://support.microsoft.com/en-us/windows/enable-virtualisation-on-windows-11-pcs-c5578302-6e43-4b4b-a449-8ced115f58e1" -ForegroundColor Blue
+Write-Host "If you're having issues with algokit try: https://stackoverflow.com/a/66409838/17193072" -ForegroundColor Blue
 WriteGreen "Successfully setup project"
