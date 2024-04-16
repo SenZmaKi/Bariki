@@ -1,12 +1,10 @@
-from algosdk.transaction import Transaction
 from beaker import LocalStateValue
 from beaker.application import (
     Application,
     unconditional_create_approval,
     unconditional_opt_in_approval,
 )
-from pyteal import Assert, Global, MinBalance, Seq, TealType, Int, Txn, abi
-from pyteal.ast.abi.transaction import PaymentTransaction
+from pyteal import Expr, TealType, Int, abi
 
 
 class LocalState:
@@ -25,10 +23,10 @@ app = (
 
 
 @app.external
-def get_goal_amount(*, output: abi.Uint64):
+def get_goal_amount(*, output: abi.Uint64) -> Expr:
     return output.set(app.state.goal_amount)
 
 
 @app.external
-def set_goal_amount(amt: abi.Uint64):
+def set_goal_amount(amt: abi.Uint64) -> Expr:
     return app.state.goal_amount.set(amt.get())
