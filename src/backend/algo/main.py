@@ -1,1 +1,0 @@
-from beaker import Application
