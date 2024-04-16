@@ -2,10 +2,7 @@
 from flask import Flask, redirect, request
 from flask import render_template
 from models.base import db
-<<<<<<< HEAD
 from flask_login import LoginManager
-=======
->>>>>>> 7ab93bf34c58e0cd668206dc33b8bf4629c96638
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bariki.db"
