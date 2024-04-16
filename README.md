@@ -10,3 +10,9 @@
 ```ps
 powershell "iwr -Uri https://raw.githubusercontent.com/SenZmaKi/Bariki/master/src/backend/setup.ps1 -UseBasicParsing | iex"
 ```
+## initializing the venv in backend/App after cloning repo
+`In windows` - adjust the PowerShell execution policy then change to venv
+
+`Set-ExecutionPolicy RemoteSigned` - Run as administrator in powershel
+
+Run `env\Bin\Activate` in `...\bariki\src\backend\app>`
