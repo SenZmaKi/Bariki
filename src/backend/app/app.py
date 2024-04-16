@@ -12,7 +12,7 @@ db.init_app(app)
 @app.route("/")
 def index():
     """ Index page """
-    return "<h1>Index </h1>"
+    return render_template('index.html')
 
 @app.route('/create_user/')
 def create_user():
