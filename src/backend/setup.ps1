@@ -115,7 +115,7 @@ WriteGreen "Installing dependencies"
 Set-Location src/backend
 RunAndExitOnFailure "$PY_COMMAND -m venv .venv"
 RunAndExitOnFailure "./.venv/Scripts/activate.bat"
-RunAndExitOnFailure "$PY_COMMAND -m pip install -r requirements.txt"
+RunAndExitOnFailure "python -m pip install -r requirements.txt"
 
 Write-Host ""
 Write-Host ""
