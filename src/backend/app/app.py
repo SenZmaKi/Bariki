@@ -8,3 +8,5 @@ app.route("/")
 def index():
     """ Index page """
     return "<h1>Index </h1>"
+
+app.route('/create_user'/)
