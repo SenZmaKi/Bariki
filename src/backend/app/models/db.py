@@ -17,10 +17,12 @@ class DB:
     def __init__(self):
         """ Init vars """
         self.__engine = create_engine("sqlite:///bariki.db")
+        # add session
 
     def new(self, obj):
         """ Add new object to database session"""
         self.__session.add(obj)
+        self.save()
     
     def save(self):
         """ Commit changes made to db"""
@@ -28,3 +30,11 @@ class DB:
 
     def get(self, cls, **kwargs):
         """ Queries database & returns object if found else None"""
+        pass
+
+    def delete(self, obj):
+        """ Delete an object from db """
+        self.__session.remove(obj)
+        self.save()
+
+    def 
