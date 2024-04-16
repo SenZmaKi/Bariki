@@ -2,6 +2,7 @@
 from flask import Flask, redirect, request
 from flask import render_template
 from models.base import db
+from models.db import DB
 
 app = Flask(__name__)
 app.config['SLQALCHEMY_DATABASE_URI'] = "sqlite://bariki.db"
