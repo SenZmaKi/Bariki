@@ -2,10 +2,10 @@
 from flask import Flask, redirect, request
 from flask import render_template
 from models.base import db
-from models.db import DB
+from flask_login import LoginManager
 
 app = Flask(__name__)
-app.config['SLQALCHEMY_DATABASE_URI'] = "sqlite://bariki.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bariki.db"
 
 db.init_app(app)
 
@@ -30,6 +30,7 @@ def login():
     return "<h1>Login</h1>"
 
 @app.route("/dashboard")
+#@login_required
 def dashboard():
     """ Dashboard page """
     return "<h1>Dashboard</h1>"
@@ -40,7 +41,7 @@ def donate():
     return "<h1>Donate</h1>"
 
 @app.route("/logout")
-def donate():
+def logout():
     """ Logout """
     return "<h1> Home Page</h1>"
 
