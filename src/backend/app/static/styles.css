@@ -133,6 +133,7 @@ body {
     display: flex;
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
+    margin-bottom: 10%;
 }
 
 .begin::before {
@@ -210,11 +211,15 @@ section#intro {
       color: white;
       margin-right: 45%;
   }
+
+  .sunglass img{
+    height: 50%;
+  }
   .suntext{
     margin-left: 45%;
     position:absolute;
     color: white;
-    font-weight: 600;
+    font-weight: 300;
     font-family: 'Josefin Sans', sans-serif;
   
   }
