@@ -3,10 +3,10 @@
 
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-from app.models.base import BaseModel, decl_base
+from app.models.base import AddressModel, decl_base
 
 
-class User(BaseModel, decl_base):
+class User(AddressModel, decl_base):
     """User class Model"""
 
     __tablename__ = "users"

@@ -35,7 +35,6 @@ def test_get_balance():
     assert balance == 0, f"Expected {MIN_ACC_BALANCE}, got {balance}"
 
 
-
 def test_create_account():
     print("Testing create account")
     create_account()
