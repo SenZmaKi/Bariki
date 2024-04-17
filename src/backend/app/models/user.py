@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Model with Donor entity model """
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from models.base import BaseModel, db
 
 
@@ -9,7 +10,7 @@ class User(BaseModel, db):
     __tablename__ = 'donors'
 
     first_name = Column(String(50), nullable=False)
-    second_name = Column(string(50), nullable=False)
+    second_name = Column(String(50), nullable=False)
     profile_pic_url = Column(String)
     bank_creds = Column(String)  # encrypt?
     # Define relationship with Cause
