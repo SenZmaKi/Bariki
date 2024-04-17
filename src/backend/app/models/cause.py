@@ -8,7 +8,6 @@ class Cause(BaseModel, db):
 
     __tablename__ = "cause"
 
-    id = Column(Integer, primary_key=True)
     name = Column(String(60), nullable=False)
     description = Column(Text)
     image_url = Column(String)
