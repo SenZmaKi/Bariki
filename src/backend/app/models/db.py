@@ -3,10 +3,10 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from app.models.user import User
-from app.models.cause import Cause
-from app.models.base import decl_base
-from app.models.donation import Donation
+from .user import User
+from .cause import Cause
+from .base import decl_base
+from .donation import Donation
 
 
 _classes = {"Cause": Cause, "User": User, "Donation": Donation}
@@ -42,16 +42,20 @@ class DB:
             self.save()
 
     def all(self, cls=None):
-        """Returns all objects of a certain class
-        e.g cls=<User> returns all users
+        """ Returns all objects of a certain class
+            e.g cls=<User> returns all users
         """
         new_dict = {}
-        for cls in _classes:
-            if cls is None or cls is _classes[cls] or cls is cls:
-                objs = self.session.query(_classes[cls]).all()
-                for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id
-                    new_dict[key] = obj
+
+        for clas in _classes:
+            if cls is not None:
+                if cls.__name__ != clas:
+                    continue
+    
+            objs = self.session.query(_classes[cls.__name__]).all()
+            for obj in objs:
+                key = obj.__class__.__name__ + "." + obj.id
+                new_dict[key] = obj
         return new_dict
 
     def reload(self):

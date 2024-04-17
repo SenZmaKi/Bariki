@@ -7,9 +7,12 @@ from typing import Any, TypeVar, cast
 from flask import Response, jsonify, render_template, Flask, request
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from app.models import database
-from app.models.user import User
-from app import algo
+from .models import database
+from .models.user import User
+from .models.cause import Cause
+from .models.donation import Donation
+
+# from app import algo
 
 ROOT_DIR = Path(__file__).parent
 UPLOAD_FOLDER = ROOT_DIR / "uploads"
@@ -21,19 +24,21 @@ app = Flask(__name__)
 T = TypeVar("T")
 
 
+def _id(obj_id: str) -> str:
+    """ Returns object id from full instance id
+        NB: instance id is returned as <CLASS>.<instance_id> from db.all()
+    """
+    return obj_id.split(".")[1]
+
 @app.route("/")
 def index():
     """Index page"""
     all_causes = database.all(Cause)
     causes = list()
     for u in all_causes:
-        obj_id = u.split(".")[1]
-        obj = db.get(Cause, obj_id)
+        obj_id = _id(u)
+        obj = database.get(Cause, obj_id)
         causes.append(obj)
-    print(all_users)
-    for cause in causes:
-        print(cause.description)
-
     return render_template("index.html", causes=causes)
 
 

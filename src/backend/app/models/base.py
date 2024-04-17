@@ -4,7 +4,7 @@
 from sqlalchemy import Column, DateTime, String
 from sqlalchemy.ext.declarative import declarative_base
 import uuid
-from app import models
+# import models
 from datetime import datetime
 
 
@@ -55,15 +55,18 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
-        # if "created_at" in new_dict:
-        #     new_dict["created_at"] = new_dict["created_at"].strftime(time)
-        # if "updated_at" in new_dict:
-        #     new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
+        if "created_at" in new_dict:
+             new_dict["created_at"] = new_dict["created_at"].strftime(TIME_FORMAT)
+        if "updated_at" in new_dict:
+            new_dict["updated_at"] = new_dict["updated_at"].strftime(TIME_FORMAT)
+        if "deadline" in new_dict:
+            # for 'cause' instances
+            new_dict["deadline"] = new_dict["deadline"].strftime(TIME_FORMAT)
         new_dict["__class__"] = self.__class__.__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]  # sqlalchemy added
-        if "password" in new_dict:
-            del new_dict["password"]
+        if "hashed_password" in new_dict:
+            del new_dict["hashed_password"] # allow ?
         return new_dict
 
     def delete(self):

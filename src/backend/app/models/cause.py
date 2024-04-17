@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, Boolean, Date, ForeignKey
 from sqlalchemy.orm import relationship
-from app.models.base import BaseModel, decl_base
+from .base import BaseModel, decl_base
 
 
 class Cause(BaseModel, decl_base):

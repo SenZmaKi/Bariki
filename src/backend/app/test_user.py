@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Test db """
-from app.models.user import User
-from app.models import database as database
+from models.user import User
+from models import database
 
 
 def test_create_user():
@@ -9,6 +9,7 @@ def test_create_user():
                     second_name='chad',
                     email='gogo@gmail.com',
                     algo_account_address='randomstring',
+                    hashed_password='sdfefrefrer',
                     bank_creds=None,
                     profile_pic_url=None
                     )
@@ -31,10 +32,19 @@ def test_get_user(u_id: str):
         print(user.to_dict())
 
 def get_all_users():
-    all_users = db.all(User)
+    all_users = database.all(User)
     users = list()
     for u in all_users:
+        obj_id = u.split(".")[1]
+        obj = database.get(User, obj_id)
+        users.append(obj.to_dict())
+    return users
 
 if __name__ == "__main__":
     u_id = test_create_user()
     test_get_user(u_id)
+    print()
+    print("--------")
+    print("All users")
+    print(get_all_users())
+    # database.flush_database()
