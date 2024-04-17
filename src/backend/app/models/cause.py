@@ -12,7 +12,7 @@ class Cause(BaseModel, db):
     description = Column(Text)
     image_url = Column(String)
     current_amount = Column(Integer, default=0)
-    goal_amount = Column(Integer)
+    goal_amount = Column(Integer, default=0)
     deadline = Column(Date)
     algo_account_address = Column(String)
     donations = relationship("Donation", back_populates="cause")
