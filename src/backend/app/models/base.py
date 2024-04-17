@@ -2,6 +2,7 @@
 """ Module with database models"""
 from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 import uuid
 import models
 from datetime import datetime
@@ -42,7 +43,7 @@ class BaseModel:
         return "[{:s}] ({:s}) {}".format(self.__class__.__name__, self.id,
                                          self.__dict__)
 
-      def save(self):
+    def save(self):
         """updates the attribute 'updated_at' with the current datetime"""
         self.updated_at = datetime.utcnow()
         models.storage.new(self)

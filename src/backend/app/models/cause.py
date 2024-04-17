@@ -10,4 +10,4 @@ class Cause(BaseModel, db):
     name = Column(String(60), nullable=False)
     description = Column(Text)
     recipient_id = Column(Integer, ForeignKey('recipients.id'), nullable=False)
-    contract_id = Column(Integer, ForeignKey('contracts.id'), nullable=False)
+    # contract_id = Column(Integer, ForeignKey('contracts.id'), nullable=False)

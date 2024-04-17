@@ -3,14 +3,14 @@
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from models.donor import Donor
-from models.recipient import Recipient
+from models.user import User
 from models.cause import Cause
+from models.donation import Donation
 from models.contract import Contract
 from models.base import BaseModel, db
 
 
-_classes = {"Donor": Donor, "Recipient": Recipient, "Cause": Cause, "Contract": Contract}
+_classes = {"User": User, "Donation": Donation, "Cause": Cause, "Contract": Contract}
 
 
 class DB:
@@ -48,8 +48,8 @@ class DB:
     def delete(self, obj=None):
         """ Delete an object from db """
         if obj is not None:
-        self.__session.delete(obj)
-        self.save()
+            self.__session.delete(obj)
+            self.save()
 
     def all(self, cls=None):
         """ Returns all objects of a certain class
@@ -64,7 +64,7 @@ class DB:
                     new_dict[key] = obj
         return (new_dict)
 
-     def reload(self):
+    def reload(self):
         """reloads data from the database"""
         db.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
