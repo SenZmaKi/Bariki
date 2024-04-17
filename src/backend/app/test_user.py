@@ -31,6 +31,11 @@ def test_get_user(u_id: str):
         print("User fetched successfully..")
         print(user.to_dict())
 
+def get_all_users():
+    all_users = db.all(User)
+    users = list()
+    for u in all_users:
+
 if __name__ == "__main__":
     u_id = test_create_user()
     test_get_user(u_id)

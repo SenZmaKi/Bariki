@@ -12,9 +12,17 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     """Index page"""
-    all_causes = db.all(User)
-    print(all_causes)
-    return render_template("index.html", users=all_causes)
+    all_causes = db.all(Cause)
+    all_causes = list()
+    for u in all_causes:
+        obj_id = u.split(".")[1]
+        obj = db.get(Cause, obj_id)
+        all_users.append(obj)
+    print(all_users)
+    for user in all_users:
+        print(cause.description)
+
+    return render_template("index.html", users=all_users)
 
 @app.route("/login")
 def login():
