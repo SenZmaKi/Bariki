@@ -14,6 +14,7 @@ class User(BaseModel, decl_base):
     first_name = Column(String(50), nullable=False)
     second_name = Column(String(50), nullable=False)
     email = Column(String, nullable=False)
+    hashed_password = Column(String, nullable=False)
     profile_pic_url = Column(String, nullable=True)
     algo_account_address = Column(String, nullable=False)
     bank_creds = Column(String, nullable=True)  # encrypt?

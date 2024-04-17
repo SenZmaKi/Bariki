@@ -29,6 +29,12 @@ algokit localnet start
 
 - From `Bariki/src/backend`
 
+
 ```sh
 python -m app
+```
+
+- Reset then restart the localnet incase you're experiencing errors
+```sh
+algokit localnet reset
 ```
