@@ -98,39 +98,6 @@ def get_balance(account_address: str, get_real_balance=False) -> int:
     return balance
 
 
-def get_donations(donor_account_address: str) -> list[Donation]:
-    # FIXME: The indexer doesn't reflect tranasactions immediately after they happen for some reason
-    # so sometimes a recently processed transaction appears as if it never happened
-    """
-    Warning don't use this shit it doesn't work
-    Retrieve all donations made by the donor
-    """
-
-    def helper(next_page: str | None = None):
-        result = INDEXER_CLIENT.search_transactions(
-            next_page=next_page,
-        )
-        txns = result["transactions"]
-        print(txns)
-        donations = [
-            Donation(
-                txn["sender"],
-                txn["payment-transaction"]["receiver"],
-                txn["payment-transaction"]["amount"],
-            )
-            for txn in txns
-            if txn["sender"] == donor_account_address
-        ]
-
-        return result.get("next-token", None), donations
-
-    next_page, accumulated_donations = helper()
-    while next_page is not None:
-        next_page, donations = helper(next_page)
-        accumulated_donations.extend(donations)
-    return accumulated_donations
-
-
 def create_account() -> str:
     """
     Create an account for a cause/donor

@@ -4,10 +4,8 @@ from .api import (
     add_funds,
     donate,
     get_balance,
-    get_donations,
     MIN_ACC_BALANCE,
 )
-import pytest
 
 
 def test_donate():
@@ -36,22 +34,6 @@ def test_get_balance():
     balance = get_balance(acc)
     assert balance == 0, f"Expected {MIN_ACC_BALANCE}, got {balance}"
 
-
-@pytest.mark.skip("get_donations() still needs some work")
-def test_get_donations():
-    donor = create_account()
-    cause = create_account()
-    donate_amt = 69_000
-    including_fee = donate_amt + TRANSACTION_FEE
-    add_funds(including_fee, donor)
-    donate(donate_amt, donor, cause)
-    donations = get_donations(donor)
-    __import__("pprint").pprint(donations)
-    assert len(donations) == 1, f"Expected 1 donation, got {len(donations)}"
-    assert (
-        donations[0].amount == donate_amt
-    ), f"Expected donation of {donate_amt}, got {donations[0].amount}"
-    raise Exception()
 
 
 def test_create_account():
