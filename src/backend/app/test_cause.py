@@ -2,10 +2,11 @@
 """ Test db """
 from models.user import User
 from models.cause import Cause
+from models.Donation import Donation
 from models import storage as db
 
 
-def test_create_user():
+def test_create_cause():
     new_user = User(first_name='giga',
                     second_name='chad',
                     email='gogo@gmail.com',

@@ -3,10 +3,10 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from models.user import User
-from models.cause import Cause
-from models.base import db
-from models.donation import Donation
+from .user import User
+from .cause import Cause
+from .base import db
+from .donation import Donation
 
 
 _classes = {"Cause": Cause, "User": User, "Donation": Donation}

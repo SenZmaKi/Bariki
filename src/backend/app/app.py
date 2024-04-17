@@ -1,21 +1,20 @@
+#!/usr/bin/python3
 """App main module"""
 
 from flask import render_template, Flask
-from models import storage as db
-from models.cause import Cause
+from .models import storage as db
+from .models.cause import Cause
+from .models.user import User
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bariki.db"
-
-# db.init_app(app)
 
 
 @app.route("/")
 def index():
     """Index page"""
-    all_causes = db.all(Cause)
+    all_causes = db.all(User)
     print(all_causes)
-    return render_template("index.html", causes=all_causes)
+    return render_template("index.html", users=all_causes)
 
 @app.route("/login")
 def login():

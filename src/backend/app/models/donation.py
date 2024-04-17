@@ -2,7 +2,7 @@
 """ Module with model for 'charity cause' entity """
 from sqlalchemy import Column, Integer, String, ForeignKey, Text
 from sqlalchemy.orm import relationship
-from models.base import BaseModel, db
+from .base import BaseModel, db
 
 class Donation(BaseModel, db):
     """ Class with 'cause' entity definition"""
