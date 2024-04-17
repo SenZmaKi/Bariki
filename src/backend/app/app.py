@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """App main module"""
-
 import os
 from pathlib import Path
 from typing import cast
@@ -32,6 +31,9 @@ def save_uploaded_file(field_name: str) -> str:
     file.save(filepath)
     return str(filepath)
 
+@app.route("/login", methods=["POST"])
+def login():
+    ...
 
 @app.route("/signup", methods=["POST"])
 def signup():

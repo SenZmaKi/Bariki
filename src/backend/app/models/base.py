@@ -3,12 +3,8 @@
 
 from sqlalchemy import Column, DateTime, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 import uuid
-<<<<<<< HEAD
 from app import models
-=======
->>>>>>> c688047d6f60761ebf74424bbd387cd5af3564fe
 from datetime import datetime
 
 

@@ -1,10 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, Boolean, Date, ForeignKey
 from sqlalchemy.orm import relationship
-<<<<<<< HEAD
 from app.models.base import BaseModel, decl_base
-=======
-from .base import BaseModel, db
->>>>>>> c688047d6f60761ebf74424bbd387cd5af3564fe
 
 
 class Cause(BaseModel, decl_base):
@@ -21,8 +17,8 @@ class Cause(BaseModel, decl_base):
     algo_account_address = Column(String)
     donations = relationship("Donation", back_populates="cause")
     is_ongoing = Column(Boolean, default=True)
-    user_id = Column(Integer, ForeignKey('users.id'))
-    initiator = relationship('User', back_populates='causes')
+    user_id = Column(Integer, ForeignKey("users.id"))
+    initiator = relationship("User", back_populates="causes")
 
     def __repr__(self):
         return f"Cause(id={self.id}, name={self.name}"

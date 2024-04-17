@@ -4,21 +4,22 @@ from pathlib import Path
 # Define the URL of the Flask route
 url = "http://localhost:5000/signup"
 ROOT_DIR = Path(__file__).parent
-join_from_root = lambda p: ROOT_DIR.joinpath(p)
 
-# Define the data to be sent in the request
-data = {
-    "first_name": "John",
-    "second_name": "Doe",
-    "email": "john@example.com",
-    "algo_account_address": "ABC123",
-}
+def join_from_root(path: str) -> Path:
+    return ROOT_DIR / path
 
-# Define the files to be sent in the request (profile photo)
-files = {"profile_photo": open(join_from_root("profile_photo.jpg"))}
+def test_sign_up():
+    data = {
+        "first_name": "John",
+        "second_name": "Doe",
+        "email": "john@example.com",
+        "algo_account_address": "ABC123",
+    }
 
-# Make the POST request
-response = requests.post(url, data=data, files=files)
+    files = {"profile_photo": open(join_from_root("profile_photo.jpg"))}
+    response = requests.post(url, data=data, files=files)
+    print("Response status code:", response.status_code)
+    print("Response text:", response.text)
 
-# Print the response status code
-print("Response status code:", response.status_code)
+def test_login():
+    pass
