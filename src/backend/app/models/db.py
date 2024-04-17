@@ -3,10 +3,10 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
-from .user import User
-from .cause import Cause
-from .base import db
-from .donation import Donation
+from app.models.user import User
+from app.models.cause import Cause
+from app.models.base import decl_base
+from app.models.donation import Donation
 
 
 _classes = {"Cause": Cause, "User": User, "Donation": Donation}
@@ -19,7 +19,7 @@ class DB:
         self._engine = create_engine("sqlite:///bariki.db")
         self.reload()
 
-    def new(self, obj):
+    def add(self, obj):
         """Add new object to database session"""
         self.session.add(obj)
         self.save()
@@ -56,7 +56,7 @@ class DB:
 
     def reload(self):
         """Reloads data from the database"""
-        db.metadata.create_all(self._engine)
+        decl_base.metadata.create_all(self._engine)
         sess_factory = sessionmaker(bind=self._engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.session = Session
@@ -79,4 +79,4 @@ class DB:
 
     def flush_database(self):
         """Flush database"""
-        db.metadata.drop_all(self._engine)
+        decl_base.metadata.drop_all(self._engine)

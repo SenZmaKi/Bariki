@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """ Module with model for 'charity cause' entity """
-from sqlalchemy import Column, Integer, String, ForeignKey, Text
+from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from .base import BaseModel, db
+from app.models.base import BaseModel, decl_base
 
-class Donation(BaseModel, db):
+class Donation(BaseModel, decl_base):
     """ Class with 'cause' entity definition"""
     __tablename__ = 'donations'
 

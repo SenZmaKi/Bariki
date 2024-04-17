@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """ Test db """
-from models.user import User
-from models.cause import Cause
-from models import storage as db
+from app.models.user import User
+from app.models import database as database
 
 
 def test_create_user():
@@ -15,7 +14,7 @@ def test_create_user():
                     )
     user_id = new_user.id
     try:
-        db.new(new_user)
+        database.add(new_user)
     except Exception as e:
         print("Error creating user {e}")
     else:
@@ -24,7 +23,7 @@ def test_create_user():
 
 def test_get_user(u_id: str):
     try:
-        user = db.get(User, u_id)
+        user = database.get(User, u_id)
     except Exception as e:
         print(f"An error occured while getting user {u_id}  {e}")
     else:

@@ -3,12 +3,12 @@
 
 from sqlalchemy import Column, DateTime, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 import uuid
+from app import models
 from datetime import datetime
 
 
-db = declarative_base()
+decl_base = declarative_base()
 TIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
 
 
@@ -49,7 +49,7 @@ class BaseModel:
     def save(self):
         """updates the attribute 'updated_at' with the current datetime"""
         self.updated_at = datetime.utcnow()
-        models.storage.new(self)
+        models.database.add(self)
         # models.storage.save() -- add save after new in method
 
     def to_dict(self):
@@ -68,4 +68,4 @@ class BaseModel:
 
     def delete(self):
         """delete the current instance from the storage"""
-        models.storage.delete(self)
+        models.database.delete(self)
