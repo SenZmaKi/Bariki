@@ -11,7 +11,6 @@ from models.donation import Donation
 
 _classes = {"Cause": Cause, "User": User, "Donation": Donation}
 
-
 class DB:
     """Interacts with the SQLite database"""
 

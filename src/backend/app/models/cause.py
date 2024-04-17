@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean, Date
+from sqlalchemy import Column, Integer, String, Text, Boolean, Date, ForeignKey
 from sqlalchemy.orm import relationship
 from models.base import BaseModel, db
 
@@ -6,18 +6,19 @@ from models.base import BaseModel, db
 class Cause(BaseModel, db):
     """Class with 'cause' model definition"""
 
-    __tablename__ = "cause"
+    __tablename__ = "causes"
 
-    id = Column(Integer, primary_key=True)
     name = Column(String(60), nullable=False)
     description = Column(Text)
     image_url = Column(String)
-    current_amount = Column(Integer)
-    goal_amount = Column(Integer)
+    current_amount = Column(Integer, default=0)
+    goal_amount = Column(Integer, default=0)
     deadline = Column(Date)
     algo_account_address = Column(String)
     donations = relationship("Donation", back_populates="cause")
-    is_ongoing = Column(Boolean)
+    is_ongoing = Column(Boolean, default=True)
+    user_id = Column(Integer, ForeignKey('users.id'))
+    initiator = relationship('User', back_populates='causes')
 
     def __repr__(self):
         return f"Cause(id={self.id}, name={self.name}"

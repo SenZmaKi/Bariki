@@ -14,6 +14,10 @@ def index():
     """Index page"""
     return render_template("index.html")
 
+@app.route("/login")
+def login():
+    """Login page"""
+    return render_template('login.html')
 
 @app.route("/create_user/")
 def create_user():
@@ -27,10 +31,6 @@ def signup():
     return "<h1>Sign Up</h1>"
 
 
-@app.route("/login")
-def login():
-    """Login page"""
-    return "<h1>Login</h1>"
 
 
 @app.route("/dashboard")
