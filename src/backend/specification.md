@@ -1,88 +1,88 @@
-
 # Backend Full Specification
 ***Warning: Each specification is subject to change*** 
 
-# Database
+## Database
 
-## Entities
+### Models
 
-### 1. Donor
-Represents a normal donating user.
+#### 1. User
+Represents a normal user.
 
-| Column Name            | Data Type | Description                              |
-|------------------------|-----------|------------------------------------------|
-| id                     | int       | Unique identifier for the user.          |
-| full_name              | string    | Full name of the user.                   |
-| algo_account_id        | int       | Foreign key referencing the Algo Account table. |
+| Column Name          | Data Type | Description                              |
+|----------------------|-----------|------------------------------------------|
+| id                   | int       | Unique identifier for the user.          |
+| full_name            | string    | Full name of the user.                   |
+| profile_photo_url    | string    | URL of the user's profile photo.         |
+| algo_account_address | string    | Algorand account address of the user.    |
+| bank_credentials     | string    | Bank credentials e.g., visa card, master card etc., |
+| causes               | Foreign Key | References the causes the user has started. |
+| donations            | Foreign Key | References the donations made by the user. |
 
-### 2. Cause
-A cause looking for donations.
+#### 2. Cause
+Represents a created cause looking for donations.
 
-| Column Name            | Data Type | Description                              |
-|------------------------|-----------|------------------------------------------|
-| id                     | int       | Unique identifier for the cause.         |
-| name                   | string    | Name of the cause.                       |
-| description            | string    | Description of the cause.                |
-| algo_account_id        | int       | Foreign key referencing the Algo Account table. |
-| smart_contract_id      | int       | Foreign key referencing the Smart Contract table. |
+| Column Name      | Data Type | Description                                |
+|------------------|-----------|--------------------------------------------|
+| id               | int       | Unique identifier for the cause.           |
+| name             | string    | Name of the cause.                         |
+| description      | string    | Description of the cause.                  |
+| image_url        | string    | URL of an image representing the cause.    |
+| current_amount   | int       | Current amount of donations for the cause. |
+| goal_amount      | int       | Goal amount of donations for the cause.    |
+| deadline         | date      | Deadline for the cause.                    |
+| algo_account_id  | int       | Algorand account ID associated with the cause. |
+| donations        | Foreign Key | References the donations made to the cause. |
+| is_ongoing       | bool      | Indicates if the cause is ongoing or not.  |
 
-### 3. Smart Contract
-Represents a smart contract that handles donations and funding for a cause.
+#### 3. Donation
+Represents a donation made by a user to a cause.
 
-| Column Name            | Data Type | Description                              |
-|------------------------|-----------|------------------------------------------|
-| id                     | int       | Unique identifier for the smart contract.|
-| algo_account_id        | int       | Foreign key referencing the Algo Account table. |
+| Column Name | Data Type | Description                            |
+|-------------|-----------|----------------------------------------|
+| id          | int       | Unique identifier for the donation.    |
+| amount      | int       | Amount of the donation.                |
+| user        | Foreign Key | References the user who made the donation. |
+| cause       | Foreign Key | References the cause the donation is for.   |
 
-### 4. Algo Account
-Represents an Algorand account.
+---
 
-| Column Name            | Data Type | Description                              |
-|------------------------|-----------|------------------------------------------|
-| id                     | int       | Unique identifier for the Algo Account. |
-| public_address         | string    | Public Algorand account address.         |
-| private_address        | string    | Private Algorand account address.        |
+With these changes, the `causes` and `donations` fields in the `User` model, and the `user` and `cause` fields in the `Donation` model are now properly defined as foreign key references to their respective models. Let me know if you need further adjustments or additional information!
 
-# Algorand API
+## Algorand API
 
-Specifies how the Algorand network will interact with the backend server and vice versa.
+#### donate
+Donates a specified amount from the donor's account to the cause's account.
 
-## create_new_account()
+- Parameters:
+  - `amt` (int): The amount to donate.
+  - `donor_account_address` (str): The address of the donor's account.
+  - `cause_account_address` (str): The address of the cause's account.
+  
+- Returns: None
 
-Creates a new Algorand account for a user/cause.
+#### add_funds
+Loads funds into the donor's account.
 
-### Returns
-- `public_address` (str): The newly generated public account address.
-- `private_address` (str): The corresponding private account address.
+- Parameters:
+  - `amount` (int): The amount of funds to add.
+  - `donor_account_address` (str): The address of the donor's account.
 
-## donate(cause_account, donor_account, amount)
+- Returns: None
 
-Donate to a cause with a specified amount of Algos.
+#### get_balance
+Gets the balance of the specified account.
 
-### Arguments
-- `cause_account_public_address_address` (str): The public Algorand account address of the cause.
-- `donor_account_private_address` (str): The private Algorand account address of the donor.
-- `amount` (int): The amount of Algos to donate.
+- Parameters:
+  - `account_address` (str): The address of the account.
+  - `get_real_balance` (bool): A boolean indicating whether not to subtract the minimum account balance from the real balance. Default is `False`.
 
-## get_amounts(cause_account_public_address)
+- Returns: int - The account balance.
 
-Retrieve the current and goal donation amounts for a cause.
+#### create_account
+Creates an account for a cause or donor.
 
-### Arguments
-- `cause_account_public_address` (str): The public Algorand account address of the cause.
+- Returns: str - The address of the newly created account.
 
-### Returns
-- (int): The current donation amount in Algos.
-- (int): The goal donation amount in Algos.
+## Controller/Router specification
+***TODO***
 
-## fund(smart_contract_private_account_address)
-
-Send current Algos in smart contract to cause's account. 
-
-***Note: This is automatically called if current_amount reaches goal_amount.***
-
-### Arguments
-- `smart_contract_account_private_address` (str): The private Algorand account address of the smart contract.
-
-# Backend API
-- To be specified by whoever makes the backend server
