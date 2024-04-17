@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """App main module"""
 
 import os
@@ -14,12 +15,14 @@ ROOT_DIR = Path(__file__).parent
 UPLOAD_FOLDER = ROOT_DIR / "uploads"
 if not UPLOAD_FOLDER.is_dir():
     os.mkdir(UPLOAD_FOLDER)
-app = Flask(__name__)
 
+app = Flask(__name__)
 @app.route("/")
 def index():
     """Index page"""
-    return render_template("index.html")
+    all_causes = database.all(User)
+    print(all_causes)
+    return render_template("index.html", users=all_causes)
 
 
 def save_uploaded_file(field_name: str) -> str:

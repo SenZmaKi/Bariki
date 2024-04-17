@@ -1,6 +1,14 @@
 #!/usr/bin/python3
 """ Model with Donor entity model """
+<<<<<<< HEAD
 from sqlalchemy import Column, String
+=======
+from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
+from .base import BaseModel, db
+from .cause import Cause
+from .donation import Donation
+>>>>>>> c688047d6f60761ebf74424bbd387cd5af3564fe
 from sqlalchemy.orm import relationship
 from app.models.base import BaseModel, decl_base
 

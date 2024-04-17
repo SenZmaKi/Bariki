@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 """ Test db """
-from app.models.user import User
-from app.models import database as database
+from models.user import User
+from models.cause import Cause
+from models.Donation import Donation
+from models import storage as db
 
 
-def test_create_user():
+def test_create_cause():
     new_user = User(first_name='giga',
                     second_name='chad',
                     email='gogo@gmail.com',
@@ -14,7 +16,7 @@ def test_create_user():
                     )
     user_id = new_user.id
     try:
-        database.add(new_user)
+        db.new(new_user)
     except Exception as e:
         print("Error creating user {e}")
     else:
@@ -23,7 +25,7 @@ def test_create_user():
 
 def test_get_user(u_id: str):
     try:
-        user = database.get(User, u_id)
+        user = db.get(User, u_id)
     except Exception as e:
         print(f"An error occured while getting user {u_id}  {e}")
     else:

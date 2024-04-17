@@ -3,10 +3,17 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+<<<<<<< HEAD
 from app.models.user import User
 from app.models.cause import Cause
 from app.models.base import decl_base
 from app.models.donation import Donation
+=======
+from .user import User
+from .cause import Cause
+from .base import db
+from .donation import Donation
+>>>>>>> c688047d6f60761ebf74424bbd387cd5af3564fe
 
 
 _classes = {"Cause": Cause, "User": User, "Donation": Donation}
