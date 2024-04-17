@@ -1,7 +1,11 @@
 #!/usr/bin/python3
 """ Model with Donor entity model """
 from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import relationship
 from models.base import BaseModel, db
+from models.cause import Cause
+from models.donation import Donation
+from sqlalchemy.orm import relationship
 
 
 class User(BaseModel, db):
@@ -10,12 +14,8 @@ class User(BaseModel, db):
 
     first_name = Column(String(50), nullable=False)
     second_name = Column(string(50), nullable=False)
-    profile_pic_url = Column(String)
-    bank_creds = Column(String)  # encrypt?
-    # Define relationship with Cause
-    cause_id = Column(Integer, ForeignKey('causes.id'))
-    cause = relationship('Cause', back_populates='donors')
-
-    # Define relationship with Donation (assuming a donor can make multiple donations)
+    profile_pic_url = Column(String, nullable=True)
+    algo_account_address = Column(String, nullable=False)
+    bank_creds = Column(String, nullable=True)  # encrypt?
+    causes = relationship('Cause', back_populates='initiator')
     donations = relationship('Donation', back_populates='donor')
-

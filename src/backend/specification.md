@@ -12,27 +12,29 @@ Represents a normal user.
 |----------------------|-----------|------------------------------------------|
 | id                   | int       | Unique identifier for the user.          |
 | full_name            | string    | Full name of the user.                   |
+| password             | string    | User's hashed password.                  |
+| email                | string    | User's email.                            |
 | profile_photo_url    | string    | URL of the user's profile photo.         |
 | algo_account_address | string    | Algorand account address of the user.    |
-| bank_credentials     | string    | Bank credentials e.g., visa card, master card etc., |
+| bank_credentials     | string    | Bank credentials e.g., account number, visa card, master card etc. |
 | causes               | Foreign Key | References the causes the user has started. |
 | donations            | Foreign Key | References the donations made by the user. |
 
 #### 2. Cause
 Represents a created cause looking for donations.
 
-| Column Name      | Data Type | Description                                |
-|------------------|-----------|--------------------------------------------|
-| id               | int       | Unique identifier for the cause.           |
-| name             | string    | Name of the cause.                         |
-| description      | string    | Description of the cause.                  |
-| image_url        | string    | URL of an image representing the cause.    |
-| current_amount   | int       | Current amount of donations for the cause. |
-| goal_amount      | int       | Goal amount of donations for the cause.    |
-| deadline         | date      | Deadline for the cause.                    |
-| algo_account_id  | int       | Algorand account ID associated with the cause. |
-| donations        | Foreign Key | References the donations made to the cause. |
-| is_ongoing       | bool      | Indicates if the cause is ongoing or not.  |
+| Column Name          | Data Type | Description                                |
+|----------------------|-----------|--------------------------------------------|
+| id                   | int       | Unique identifier for the cause.           |
+| name                 | string    | Name of the cause.                         |
+| description          | string    | Description of the cause.                  |
+| image_url            | string    | URL of an image representing the cause.    |
+| current_amount       | int       | Current amount of donations for the cause. |
+| goal_amount          | int       | Goal amount of donations for the cause.    |
+| deadline             | date      | Deadline for the cause.                    |
+| algo_account_address | string    | Algorand account string associated with the cause. |
+| donations            | Foreign Key | References the donations made to the cause. |
+| is_ongoing           | bool      | Indicates if the cause is ongoing or not.  |
 
 #### 3. Donation
 Represents a donation made by a user to a cause.
@@ -41,12 +43,6 @@ Represents a donation made by a user to a cause.
 |-------------|-----------|----------------------------------------|
 | id          | int       | Unique identifier for the donation.    |
 | amount      | int       | Amount of the donation.                |
-| user        | Foreign Key | References the user who made the donation. |
-| cause       | Foreign Key | References the cause the donation is for.   |
-
----
-
-With these changes, the `causes` and `donations` fields in the `User` model, and the `user` and `cause` fields in the `Donation` model are now properly defined as foreign key references to their respective models. Let me know if you need further adjustments or additional information!
 
 ## Algorand API
 
@@ -83,6 +79,11 @@ Creates an account for a cause or donor.
 
 - Returns: str - The address of the newly created account.
 
+#### fund
+Fund the user once the goal is reached/deadline has expired
+- Parameters:
+  - cause_account_address (str): The address of the cause's account.
+  - user_account_address (str): The user's address.
+
 ## Controller/Router specification
 ***TODO***
-

@@ -35,6 +35,17 @@ def _make_transaction(
     receiver_address: str,
     sp: transaction.SuggestedParams,
 ) -> None:
+    balance = get_balance(sender_address, True)
+    full_spend = amt + TRANSACTION_FEE
+    new_balance = balance - full_spend
+    if new_balance < MIN_ACC_BALANCE:
+        raise Exception(
+            f"""Transaction + Transaction fee results in a balance below the minimum account balance i.e., 
+            {amt} + {TRANSACTION_FEE} = {full_spend}
+            {balance} - {full_spend} = {new_balance}
+            {new_balance} < {MIN_ACC_BALANCE}"""
+        )
+
     unsigned_txn = transaction.PaymentTxn(
         sender=sender_address,
         receiver=receiver_address,
@@ -51,17 +62,6 @@ def donate(amt: int, donor_account_address: str, cause_account_address: str) -> 
     Donate into the cause account address
     """
     sender_acc = _get_account(donor_account_address)
-    balance = get_balance(donor_account_address, True)
-    full_spend = amt + TRANSACTION_FEE
-    new_balance = balance - full_spend
-    if new_balance < MIN_ACC_BALANCE:
-        raise Exception(
-            f"""Transaction + Transaction fee results in a balance below the minimum account balance i.e., 
-            {amt} + {TRANSACTION_FEE} = {full_spend}
-            {balance} - {full_spend} = {new_balance}
-            {new_balance} < {MIN_ACC_BALANCE}"""
-        )
-
     _make_transaction(
         amt,
         sender_acc.private_key,
@@ -71,7 +71,21 @@ def donate(amt: int, donor_account_address: str, cause_account_address: str) -> 
     )
 
 
-def add_funds(amount: int, donor_account_address: str) -> None:
+def fund(amount: int, cause_account_address: str, user_account_address: str):
+    """
+    Fund the user once the goal is reached/deadline has expired
+    """
+    acc = _get_account(cause_account_address)
+    _make_transaction(
+        amount,
+        acc.private_key,
+        acc.address,
+        user_account_address,
+        ALGOD_CLIENT.suggested_params(),
+    )
+
+
+def add_funds(amount: int, user_account_address: str) -> None:
     """
     Load funds into the donor's account
     """
@@ -80,7 +94,7 @@ def add_funds(amount: int, donor_account_address: str) -> None:
         amount,
         DISPENSER_ACCOUNT.private_key,
         DISPENSER_ACCOUNT.address,
-        donor_account_address,
+        user_account_address,
         sp=sp,
     )
 
