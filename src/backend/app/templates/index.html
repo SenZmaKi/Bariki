@@ -14,6 +14,7 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
+
     <div class="back">
         <div class="color">
       <div class="container">
@@ -49,24 +50,72 @@
     <div class="begin">
     <header>
         <h1> BARIKI FOUNDATION <br>
-              <h2>Transparent,Secure and Efficient</h2>
+              <h2>Transparent. Secure. Efficient</h2>
     </header>
 </div>
-    <main>
-        <section id="intro">
-            
-                
-                      <div class="sunglass">
-<img src="../static/images/block.jpg" style="width: 460px; height: 220px;" alt="">
-                        <div class="suntext">
-                          "Bariki" is a blockchain-based fundraising platform designed to facilitate secure and transparent charitable donations.<br>
-                           The service harnesses the power of blockchain technology to offer both donors and beneficiaries a reliable, trustworthy system for managing and tracking contributions.
-                
-                
-                        </div>
+    
+    <div id="react-root"></div> <!-- React will render your components here -->
+
+    <script type="text/babel">
+      // Define your React components
+      function FundraiserBanner() {
+          return (
+              <div className="fundraising-banner">
+                  <div className="content">
+                      <h1>Get started with Bariki<br/></h1>
+                      <div className="actions">
+                          <button className="start-button">START TODAY</button>
+                          <div className="search-box">
+                              <input type="text" placeholder="Find a Fundraiser..." />
+                             
+                          </div>
                       </div>
-                   
-        </section>
-    </main>
+                  </div>
+              </div>
+          );
+      }
+
+      function BarikiFoundation() {
+          return (
+              <div className="begin">
+                  <header>
+                      <h1> BARIKI FOUNDATION <br/>
+                          <h2>Transparent,Secure and Efficient</h2>
+                      </h1>
+                  </header>
+              </div>
+          );
+      }
+
+      function App() {
+          return (
+              <>
+                  <FundraiserBanner />
+           
+                  {/* You can add more components here as needed */}
+              </>
+          );
+      }
+
+      // Render your React application to the mount point
+      ReactDOM.render(<App />, document.getElementById('react-root'));
+  </script>
+
+<main>
+  <section id="intro">
+      
+          
+                <div class="sunglass">
+<img src="../static/images/block.jpg" style="width: 460px; height: 220px;" alt="">
+                  <div class="suntext">
+                    "Bariki" is a blockchain-based fundraising platform designed to facilitate secure and transparent charitable donations.<br>
+                     The service harnesses the power of blockchain technology to offer both donors and beneficiaries a reliable, trustworthy system for managing and tracking contributions.
+          
+          
+                  </div>
+                </div>
+             
+  </section>
+</main>
 </body>
 </html>
