@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, Text, Boolean, Date, ForeignKey
 from sqlalchemy.orm import relationship
-from models.base import BaseModel, db
+from app.models.base import BaseModel, decl_base
 
 
-class Cause(BaseModel, db):
+class Cause(BaseModel, decl_base):
     """Class with 'cause' model definition"""
 
     __tablename__ = "causes"

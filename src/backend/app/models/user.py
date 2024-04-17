@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 """ Model with Donor entity model """
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-from models.base import BaseModel, db
-from models.cause import Cause
-from models.donation import Donation
-from sqlalchemy.orm import relationship
+from app.models.base import BaseModel, decl_base
 
 
-class User(BaseModel, db):
+class User(BaseModel, decl_base):
     """ User class Model """
     __tablename__ = 'users'
 
