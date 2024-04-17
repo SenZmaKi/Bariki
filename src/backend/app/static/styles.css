@@ -307,6 +307,8 @@ margin-right: 10%;
   .nzima div{margin-left: 50px;}
 
   .deliveries{
+    font-family: "Sedan", serif;
+
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -320,6 +322,8 @@ margin-right: 10%;
   }
 
   .safety{
+    font-family: "Sedan", serif;
+
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -333,6 +337,8 @@ margin-right: 10%;
   }
 
   .tracking{
+    font-family: "Sedan", serif;
+
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -346,6 +352,8 @@ margin-right: 10%;
   }
 
   .inventory{
+    font-family: "Sedan", serif;
+
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -357,3 +365,18 @@ margin-right: 10%;
     margin-bottom: 50px;
     background-color: #000a16;
   }
+
+  .ian{
+    color: white;
+  }
+
+  .copy{
+    font-family: "Sedan", serif;
+
+    background-color: #141414;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    display: flex;
+   color: white;
+ }
