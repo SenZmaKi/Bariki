@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Module with model for 'charity cause' entity """
 from sqlalchemy import Column, Integer, String, ForeignKey, Text
 from models.base import BaseModel, db

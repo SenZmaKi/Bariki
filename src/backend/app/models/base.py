@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """ Module with database models"""
 from flask import Flask
 from sqlalchemy.ext.declarative import declarative_base
