@@ -19,7 +19,7 @@ def test_create_user():
     except Exception as e:
         print("Error creating user {e}")
     else:
-        print(f"User created successfullt {user_id}")
+        print(f"User created successfully {user_id}")
 
 def test_get_user(u_id: str):
     try:
@@ -27,8 +27,10 @@ def test_get_user(u_id: str):
     except Exception as e:
         print(f"An error occured while getting user {u_id}  {e}")
     else:
-        print(user)
+        print("User fetched successfully..")
+        print(user.to_dict())
 
 
 if __name__ == "__main__":
-    test_create_user()
+    # test_create_user()
+    test_get_user("fed08bb9-f183-4cb0-810e-cce3b7b3bae0")
