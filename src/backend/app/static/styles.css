@@ -225,3 +225,62 @@ section#intro {
   
   }
 
+  .fundraising-banner {
+    background: url('../static/images/black.jpeg'); /* Replace with your background image */
+    
+    color: #fff; /* Text color */
+    padding: 20px; /* Adjust as needed */
+    position: relative; /* For inner positioning */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2em; /* Adjust your font size as needed */
+    margin: 0;
+  }
+  
+  .actions {
+    margin-top: 10px;
+    
+  }
+  
+  .start-button, .search-box input, .search-button {
+    padding: 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 15px; /* Adjust if you want rounded corners */
+  }
+  
+  .start-button {
+    background: #c9ae12; /* Adjust button color as needed */
+    cursor: pointer;
+    color: black;
+    font-weight: 700;
+  }
+  
+  .search-box {
+    display: inline-block; /* Allows input and button to be on the same line */
+    position: relative;
+  }
+  
+  .search-box input {
+    padding-right: 40px; /* Leave space for the search icon */
+    width: 100%;
+  }
+  
+  .search-button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    cursor: pointer;
+  }
+  
+  /* You will need to adjust colors, dimensions, backgrounds, etc., to match your design */
+  
