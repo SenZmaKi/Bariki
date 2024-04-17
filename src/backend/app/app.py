@@ -32,7 +32,7 @@ def signup():
 @app.route("/login")
 def login():
     """ Login page """
-    return "<h1>Login</h1>"
+    return render_template('login.html')
 
 @app.route("/dashboard")
 #@login_required
