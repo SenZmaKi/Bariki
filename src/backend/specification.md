@@ -30,7 +30,7 @@ Represents a created cause looking for donations.
 | current_amount   | int       | Current amount of donations for the cause. |
 | goal_amount      | int       | Goal amount of donations for the cause.    |
 | deadline         | date      | Deadline for the cause.                    |
-| algo_account_id  | int       | Algorand account ID associated with the cause. |
+| algo_account_address  | string       | Algorand account string associated with the cause. |
 | donations        | Foreign Key | References the donations made to the cause. |
 | is_ongoing       | bool      | Indicates if the cause is ongoing or not.  |
 
@@ -82,6 +82,12 @@ Gets the balance of the specified account.
 Creates an account for a cause or donor.
 
 - Returns: str - The address of the newly created account.
+
+#### fund
+Fund the user once the goal is reached/deadline has expired
+- Parameters:
+  - cause_account_address (str): The address of the cause's account.
+  - user_account_address (str): The user's address.
 
 ## Controller/Router specification
 ***TODO***
