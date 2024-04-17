@@ -43,8 +43,6 @@ Represents a donation made by a user to a cause.
 |-------------|-----------|----------------------------------------|
 | id          | int       | Unique identifier for the donation.    |
 | amount      | int       | Amount of the donation.                |
-| user        | Foreign Key | References the user who made the donation. |
-| cause       | Foreign Key | References the cause the donation is for.   |
 
 ## Algorand API
 
