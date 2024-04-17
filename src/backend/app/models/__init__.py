@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from models.db import DB
+from .db import DB
 
 storage = DB()
 storage.reload()
