@@ -1,13 +1,18 @@
 """ App main module """
 from flask import Flask, redirect, request
 from flask import render_template
-from models.base import db
 from flask_login import LoginManager
+from models.cause import Cause
+from models.donor import Donor
+from models.recipient import Recipient
+from models.contract import Contract
+import models.storage as db
+
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bariki.db"
+# app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///bariki.db"
 
-db.init_app(app)
+# db.init_app(app)
 
 @app.route("/")
 def index():
