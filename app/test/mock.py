@@ -7,6 +7,7 @@ CREATE_CAUSE_DTO = {
     "image_url": "cause_image_url.jpg",
     "goal_amount": 69420,
     "deadline": get_current_utc_time().isoformat(),
+    "user_id": "",
 }
 
 USER_SIGNUP_DTO = {
@@ -21,6 +22,4 @@ USER_LOGIN_DTO = {
     "hashed_password": USER_SIGNUP_DTO["hashed_password"],
 }
 
-#NOTE: This is never used since id's are dynamically created by the db
-# it's  just here for documentation purposes
 DONATE_DTO = {"cause_id": "", "user_id": "", "amount": 69420}

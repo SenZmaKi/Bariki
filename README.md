@@ -1,4 +1,4 @@
-# Getting Started 
+# Getting Started
 
 ## Algorand resources
 
@@ -14,7 +14,7 @@
 ### Setup (Windows)
 
 ```ps
-powershell "iwr -Uri https://raw.githubusercontent.com/SenZmaKi/Bariki/master/src/backend/setup.ps1 -UseBasicParsing | iex"
+powershell "iwr -Uri https://raw.githubusercontent.com/SenZmaKi/Bariki/master/setup.ps1 -UseBasicParsing | iex"
 ```
 
 ### Start server
@@ -27,14 +27,12 @@ powershell "iwr -Uri https://raw.githubusercontent.com/SenZmaKi/Bariki/master/sr
 algokit localnet start
 ```
 
-- From `Bariki/src/backend`
-
-
 ```sh
 python -m app
 ```
 
 - Reset then restart the localnet incase you're experiencing errors
+
 ```sh
 algokit localnet reset
 ```

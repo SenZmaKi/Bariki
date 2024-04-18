@@ -1,10 +1,11 @@
 from datetime import datetime
 from sqlalchemy import Column, Integer, String, Text, Boolean, Date, ForeignKey
 from sqlalchemy.orm import relationship
-from app.models.base import AddressModel, decl_base
+from app.models.base import decl_base
+from app.models.donation import WithDonationsFields
 
 
-class Cause(AddressModel, decl_base):
+class Cause(WithDonationsFields, decl_base):
     """Class with 'cause' model definition"""
 
     def __init__(self, **kwargs):
@@ -21,7 +22,7 @@ class Cause(AddressModel, decl_base):
     goal_amount = Column(Integer)
     deadline = Column(Date)
     algo_account_address = Column(String)
-    donations = relationship("Donation", back_populates="cause")
+    donations = relationship("Donation", back_populates="cause")  # pyright: ignore
     is_ongoing = Column(Boolean, default=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     initiator = relationship("User", back_populates="causes")

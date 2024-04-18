@@ -47,10 +47,9 @@ class BaseModel:
         _dict = self.__dict__.copy()
         _dict["__class__"] = self.__class__.__name__
         if "_sa_instance_state" in _dict:
-            del _dict["_sa_instance_state"]  # sqlalchemy added
-        if "password" in _dict:
-            del _dict["password"]
-        # Convert datetime to iso cause it is the standard
+            del _dict["_sa_instance_state"]
+        if "hashed_password" in _dict:
+            del _dict["hashed_password"]
         for k, v in _dict.items():
             if isinstance(v, datetime):
                 _dict[k] = v.isoformat()

@@ -28,4 +28,3 @@ def test_create_cause():
     database.add(cause)
     pprint(cause.to_dict())
     return cause
-

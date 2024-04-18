@@ -3,10 +3,11 @@
 
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
-from app.models.base import AddressModel, decl_base
+from app.models.base import decl_base
+from app.models.donation import WithDonationsFields
 
 
-class User(AddressModel, decl_base):
+class User(WithDonationsFields, decl_base):
     """User class Model"""
 
     __tablename__ = "users"
@@ -19,4 +20,4 @@ class User(AddressModel, decl_base):
     algo_account_address = Column(String, nullable=False)
     bank_creds = Column(String, nullable=True)  # encrypt?
     causes = relationship("Cause", back_populates="initiator")
-    donations = relationship("Donation", back_populates="donor")
+    donations = relationship("Donation", back_populates="donor")  # pyright: ignore

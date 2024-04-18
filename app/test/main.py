@@ -1,19 +1,12 @@
 import requests
-from app.models.cause import Cause
-from app.test.mock import CREATE_CAUSE_DTO, USER_LOGIN_DTO, USER_SIGNUP_DTO
+from app.test.mock import CREATE_CAUSE_DTO, DONATE_DTO, USER_LOGIN_DTO, USER_SIGNUP_DTO
 from app.test.utils import join_from_root
 from app.test import model as test_model
-from app.models import database
 
 
 def make_url(resource: str) -> str:
     url = f"http://localhost:5000/{resource}"
     return url
-
-
-class TestFailedException(Exception):
-    def __init__(self) -> None:
-        super().__init__("Test failed")
 
 
 def print_response(response: requests.Response) -> None:
@@ -28,36 +21,36 @@ def test_sign_up():
         url = make_url("signup")
         response = requests.post(url, data=USER_SIGNUP_DTO, files=files)
         print_response(response)
-        if response.status_code != 200 or response.status_code != 409:
-            raise TestFailedException()
+        assert response.status_code == 200 or response.status_code == 409
 
 
 def test_login():
     url = make_url("login")
     response = requests.post(url, data=USER_LOGIN_DTO)
     print_response(response)
-    if response.status_code != 200:
-        raise TestFailedException()
+    assert response.status_code != 200
 
 
 def test_create_cause():
+    user = test_model.test_create_user()
     url = make_url("create-cause")
-    response = requests.post(url, data=CREATE_CAUSE_DTO)
+    data = CREATE_CAUSE_DTO.copy()
+    data["user_id"] = user.id
+    response = requests.post(url, data)
     print_response(response)
-    if response.status_code != 201:
-        raise TestFailedException()
+    assert response.status_code == 201
 
 
 def test_donate():
     user = test_model.test_create_user()
     cause = test_model.test_create_cause()
     url = make_url("donate")
-    amount = 69420
-    data = {"user_id": user.id, "cause_id": cause.id, "amount": amount}
+    data = DONATE_DTO.copy()
+    data["user_id"] = user.id
+    data["cause_id"] = cause.id
     response = requests.post(url, data=data)
     print_response(response)
-    if response.status_code != 201:
-        raise TestFailedException()
+    assert response.status_code == 201
 
 
 def test_search_causes():
@@ -67,9 +60,17 @@ def test_search_causes():
     response = requests.post(url, data)
     print_response(response)
     resp_json = response.json()
+    assert response.status_code == 200
     causes = resp_json["data"]["results"]
-    if response.status_code != 200 or not any(c["id"] == cause.id for c in causes):
-        raise TestFailedException()
+    assert any(c["id"] == cause.id for c in causes)
 
 
-test_donate()
+def test_get_causes():
+    cause = test_model.test_create_cause()
+    url = make_url("causes")
+    response = requests.get(url)
+    print_response(response)
+    assert response.status_code == 200
+    resp_json = response.json()
+    causes = resp_json["data"]["causes"]
+    assert any(c["id"] == cause.id for c in causes)
