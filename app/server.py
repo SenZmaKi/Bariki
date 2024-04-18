@@ -4,7 +4,7 @@
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
-from flask import Response, jsonify, Flask, request, render_template
+from flask import Response, jsonify, Flask, request, render_template, flash, redirect, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.models import database
@@ -47,14 +47,18 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 def index():
     causes = database.all(Cause)
     all_causes  = list()
-    .all() = 'User.sdbhfrgbbir"'
+    for cause in causes:
+        obj = database.get(Cause, cause)
+        all_causes.append(obj.to_dict())
+    return render_template('index.html', causes=all_causes)
 
-    return render_template('index.html')
-
-
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["POST, GET"])
 def login():
-    email = request.form.get("email")
+    if request.method == "GET":
+        return render_template('login.html')
+    
+    # process form data
+    email = request.POST.get("email")
     users = (
         database.session.query(User)
         .filter_by(
@@ -67,7 +71,7 @@ def login():
     # that the password specifically is what is invalids reveals that the email
     # exists in our database, but for better easier debugging during devt I've kept it
     if not users:
-        return error_response("Invalid email"), 401
+        flash("Invalid email") # TODO add message type
     password = unwrap(request.form.get("password"))
     target_users = [
         u
@@ -75,9 +79,11 @@ def login():
         if check_password_hash(u.hashed_password, password)  # pyright: ignore
     ]
     if not target_users:
-        return error_response("Invalid password"), 401
+        flash("Invalid password") # TODO add message type
     user_dict = target_users[0].to_dict()
-    return user_dict, 200
+    return redirect(url_for('dashboard', user_id=user.id))
+    # return user_dict, 20
+
 
 
 @app.route("/causes", methods=["GET"])
@@ -88,8 +94,11 @@ def causes():
     return success_response(data), 200
 
 
-@app.route("/signup", methods=["POST"])
+@app.route("/signup", methods=["POST, GET"], strict_slashes=False)
 def signup():
+    if request.method == "GET":
+        return render_template('login.html')
+    
     first_name = request.form.get("first_name")
     second_name = request.form.get("second_name")
     email = request.form.get("email")
@@ -109,8 +118,22 @@ def signup():
     # Add the new_user to the database session
     database.add(user)
     user_dict = user.to_dict()
-    return success_response(user_dict), 201
+    return redirect(url_for('dashboard', user_id=user.id))
 
+@app.route('dashboard/', methods=['GET', 'POST'])
+def dashboard(user_id):
+    """ Get all data required for user dashboard
+        # NOTE : requires login
+    """
+    if request.method == "GET":
+        my_causes = request.curent_user.causes
+        # get active cause (only one)
+        my_donations = request.current_user.donations
+        return render_template('dashboard.html', causes=my_causes, donations=my_donations)
+    
+    # TODO user created a cause
+    flash("Cause created successfully")
+    return redirect(url_for('dashboard', user_id=user_id))
 
 @app.route("/create-cause", methods=["POST"])
 def create_cause():

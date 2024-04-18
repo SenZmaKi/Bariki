@@ -51,7 +51,7 @@ class DB:
             if cls is None or cls is _classes[cls] or cls is cls:
                 objs = self.session.query(_classes[cls]).all()
                 for obj in objs:
-                    key = obj.__class__.__name__ + "." + obj.id
+                    key = obj.id # removed class name`
                     new_dict[key] = obj
         return new_dict
 
