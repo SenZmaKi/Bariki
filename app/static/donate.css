@@ -144,12 +144,11 @@ position: relative;
         width: 100%;
         max-width: 500px;
         padding: 20px;
-        padding-left: 150px;
         border: 1px solid #ccc;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0,0,0,0.1);
     background-image: url(../static/images/nyeus.jpeg);    
-    }
+    margin-left: 30%;}
     
     .form-group {
         margin-bottom: 15px;
