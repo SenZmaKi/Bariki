@@ -103,7 +103,7 @@ nav a li:hover{
     display: flex;
     align-items: center; /* Center content vertically */
     justify-content: center; /* Center content horizontally */
-    margin-bottom: 10%;
+    margin-bottom: 0%;
 }
 
 .begin::before {
@@ -168,7 +168,7 @@ main {
 }
 
 section#intro {
-  margin-top: 20px;
+
   font-size: 1.2rem;
 }
 
@@ -350,3 +350,53 @@ margin-right: 10%;
     display: flex;
    color: white;
  }
+
+ /* SLIDER */
+ .slider-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider-wrapper {
+  display: flex;
+  transition: all 0.3s ease-in-out;
+}
+
+.card {
+  flex: 0 0 auto;
+  width: 33.3333%;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0.5;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card.active {
+  opacity: 1;
+}
+
+.card img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}

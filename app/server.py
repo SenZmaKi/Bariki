@@ -4,8 +4,12 @@
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
+<<<<<<< HEAD
 from flask import Response, jsonify, Flask, request
 from flask.templating import render_template
+=======
+from flask import Response, jsonify, Flask, request, render_template
+>>>>>>> b44fa22b40938cf8b713d2ff91829bd7a2162ac7
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.models import database
@@ -48,7 +52,6 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 def index():
     causes = database.session.query(Cause).all()
     return render_template("index.html")
-
 
 @app.route("/login", methods=["POST"])
 def login():
