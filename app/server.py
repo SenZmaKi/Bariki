@@ -46,8 +46,9 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 @app.route("/")
 def index():
     causes = database.all(Cause)
-    all_causes  =list()
-    for cause in causes:
+    all_causes  = list()
+    .all() = 'User.sdbhfrgbbir"'
+
     return render_template('index.html')
 
 
