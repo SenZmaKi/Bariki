@@ -182,13 +182,13 @@ def create_cause():
     """ create a cause """
     if request.method == "GET":
         return render_template("createcause.html")
-
+    
+    print(request.form)
     user_id = request.args.get("user_id")
     name = request.form.get("name")
     description = request.form.get("description")
-    goal_amount = request.form.get("goal_amount")
+    goal_amount = request.form.get("goal")
     deadline = request.form.get("deadline")
-    user_id = request.form.get("user_id")
     cause = Cause(
         name=name,
         description=description,
