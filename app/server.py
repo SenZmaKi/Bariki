@@ -4,7 +4,7 @@
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
-from flask import Response, jsonify, Flask, request
+from flask import Response, jsonify, Flask, request, flash, redirect, url_for
 from flask.templating import render_template
 from werkzeug.security import check_password_hash, generate_password_hash
 
@@ -51,6 +51,9 @@ def index():
 
 @app.route("/login", methods=["POST"])
 def login():
+    if request.method == "GET":
+        return render_template('login.html')
+    
     email = request.form.get("email")
     users = (
         database.session.query(User)
@@ -74,7 +77,16 @@ def login():
     if not target_users:
         return error_response("Invalid password"), 401
     user_dict = target_users[0].to_dict()
-    return user_dict, 200
+    return redirect(url_for('dashboard', user_id=user.id))
+
+app.route('/dashboard', methods=["GET"])
+def dashboard(user_id):
+    """ Dashboard"""
+    # get user
+    # get user's causes
+    # get user's donations
+    return render_template('dashboard.html')
+    
 
 
 @app.route("/causes", methods=["GET"])
@@ -85,8 +97,11 @@ def causes():
     return success_response(data), 200
 
 
-@app.route("/signup", methods=["POST"])
+@app.route("/signup", methods=["POST, GET"])
 def signup():
+    if request.method == "GET":
+        return render_template('login.html')
+    
     first_name = request.form.get("first_name")
     second_name = request.form.get("second_name")
     email = request.form.get("email")
@@ -105,12 +120,17 @@ def signup():
     )
     # Add the new_user to the database session
     database.add(user)
-    user_dict = user.to_dict()
-    return success_response(user_dict), 201
+    if not user:
+        flash("Could not log you in")
+        return redirect(url_for('signup'))
+    return render_template(url_for('dashboard', user_id=user.id))
 
 
-@app.route("/create-cause", methods=["POST"])
-def create_cause():
+@app.route("/create-cause", methods=["POST, GET"], strict_slashes=False)
+def create_cause(user_id):
+    if request.method == "GET":
+        return render_template('createcause.html')
+    
     name = request.form.get("name")
     description = request.form.get("description")
     goal_amount = request.form.get("goal_amount")
@@ -124,8 +144,9 @@ def create_cause():
         user_id=user_id,
     )
     database.add(cause)
-    cause_dict = cause.to_dict()
-    return success_response(cause_dict), 201
+   # user posted a cause or sth
+    flash("Cause created successfuly")
+    return redirect(url_for('dashboard', user_id=user_id))
 
 
 @app.route("/search-causes", methods=["POST"])
