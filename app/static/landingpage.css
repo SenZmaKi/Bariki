@@ -125,3 +125,38 @@ color: white;
 font-weight: 500;
 font-size: 30px;
  }
+ .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.fundraiser-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    margin: 20px;
+    overflow: hidden;
+}
+
+.fundraiser-image img {
+    width: 100%;
+    height: auto;
+}
+
+.fundraiser-info {
+    padding: 15px;
+}
+
+.fundraiser-info h3 {
+    color: #333;
+    margin-top: 0;
+}
+
+.fundraiser-info p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+}
