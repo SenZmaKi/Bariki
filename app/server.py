@@ -201,7 +201,7 @@ def create_cause():
     return redirect(url_for("dashboard", user_id=user_id))
 
 
-@app.route("/search-causes", methods=["POST"])
+@app.route("/search-causes", methods=["POST", "GET"])
 def search_causes():
     cause_name = unwrap(request.form.get("query"))
     cause_name_lower = cause_name.lower()
