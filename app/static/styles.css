@@ -287,9 +287,10 @@ margin-right: 10%;
     flex-direction: column;
     text-align: center;
     color: #bababa;
+    border-radius: 20px;
  
     margin-bottom: 50px;
-    background-color: #000a16;
+    background-color: #7d92ac;
   }
 
   .safety{
@@ -302,9 +303,10 @@ margin-right: 10%;
     flex-direction: column;
     text-align: center;
     color: #bababa;
+    border-radius: 20px;
     /* margin-left: 200px; */
     margin-bottom: 50px;
-    background-color: #000a16;
+    background-color: #db6f3c;;
   }
 
   .tracking{
@@ -317,9 +319,10 @@ margin-right: 10%;
     flex-direction: column;
     text-align: center;
     color: #bababa;
+    border-radius: 20px;
     
     margin-bottom: 50px;
-    background-color: #000a16;
+    background-color: #7d92ac;
   }
 
   .inventory{
@@ -332,9 +335,10 @@ margin-right: 10%;
     flex-direction: column;
     text-align: center;
     color: #bababa;
+    border-radius: 20px;
    
     margin-bottom: 50px;
-    background-color: #000a16;
+    background-color: #db6f3c;;
   }
 
   .ian{
@@ -367,7 +371,7 @@ margin-right: 10%;
 
 .card {
   margin: auto;
-  background-color: #81b6bd;
+  background-color: #db6f3c;
   position: relative;
   width: 320px;
   padding: 20px;
@@ -375,6 +379,25 @@ margin-right: 10%;
   box-sizing: border-box;
   opacity: 0.5;
   transition: opacity 0.3s ease-in-out;
+}
+
+.card button{
+  display: block;
+  margin: auto;
+  background-color: #007bff; /* Example blue background color */
+  color: white; /* White text color */
+  border: none; /* No border */
+  padding: 10px 20px; /* Top and bottom padding 10px, left and right padding 20px */
+  border-radius: 20px; /* Rounded corners */
+  cursor: pointer; /* Pointer/hand icon when mouse hovers over button */
+  font-weight: bold; /* Bold font */
+  text-transform: uppercase; /* Uppercase text */
+  margin-top: 10px; /* Margin at the top */
+  transition: background-color 0.3s ease;
+}
+
+.card p{
+  text-align: center;
 }
 
 .card.active {

@@ -77,7 +77,6 @@ def index():
     print(causes_dict)
     return render_template("index.html", causes=causes_dict)
 
-
 @app.route("/signup/", methods=["POST", "GET"], strict_slashes=False)
 def signup():
     if request.method == "GET":

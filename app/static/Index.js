@@ -23,7 +23,7 @@ function CarouselCardSlider() {
                         <img src={card.imageUrl} alt={card.name} />
                         <h3>{card.name}</h3>
                         <p>{card.description}</p>
-                        <button>View More</button>
+                        <button>DONATE</button>
                     </div>
                 ))}
             </div>
