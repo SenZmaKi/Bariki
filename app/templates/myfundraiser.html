@@ -23,23 +23,10 @@
                 <h3>Your Fundraisers</h3>
         
             </div>
-            
-        
-            <div class="gallery">
-                <div class="fundraiser-card">
-                    <div class="fundraiser-image">
-                        <img src="../static/images/whale.png"  alt="Fundraiser Header">
-                    </div>
-                    <div class="fundraiser-info">
-                        <h3>Name: Save the Whales>
-                        <p>Description: Help us raise funds to protect the whales in the Pacific Ocean from illegal hunting and pollution.</p>
-                        <p>Goal Amount: KSH 500,000</p>
-                        <p>Deadline: 2023-12-31</p>
-                        <p>Algo Account: XXXXXALGORANDXXXXX</p>
-                    </div>
-                </div>
-                <!-- Additional fundraiser cards can be added here -->
-            </div>
+
+            {% for cause in causes %}
+                <p>{{ cause.name }}</p>
+            {% endfor %}
         </div>
 </body>
 </html>

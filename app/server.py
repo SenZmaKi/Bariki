@@ -71,7 +71,7 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 @app.route("/")
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for("dashboard", user_id=current_user.id))
+        return redirect(url_for("dashboard"))
     causes = database.all(Cause)
     all_causes = list()
     for cause in causes.values():
@@ -145,7 +145,7 @@ def login():
     if check_password_hash(user.hashed_password, password):
         login_user(user)
         print(current_user.is_authenticated)
-        return redirect(url_for("dashboard", user_id=user.id))
+        return redirect(url_for("dashboard"))
 
     return redirect(url_for("login"))
 
@@ -155,22 +155,48 @@ def login():
 def logout():
     """Logout user"""
     logout_user()
-    return redirect(url_for("login"))
+    return redirect(url_for("index"))
 
 
 @app.route("/dashboard", methods=["GET"])
 @login_required
 def dashboard():
     """Dashboard"""
-    user_id = request.args.get("user_id")
-    # Now you have access to the user_id
-    print(user_id)
-    print(current_user)
-    # get user
-    # get user's causes
-    # get user's donations
-    return render_template("dashboard.html")
+    # user_id = request.args.get("user_id")
+    all_causes = current_user.causes
+    causes = list()
+    for cause in all_causes:
+        if cause.is_ongoing:
+            causes.append(cause.to_dict())
+    return render_template("dashboard.html", active_causes=causes)
 
+@app.route('/my-fundraisers', methods=["GET", "POST"], strict_slashes=False)
+@login_required
+def my_fundraisers():
+    """ Return all my fundraisers page """
+    # add fnality for delete fundraiser (POST request)
+    all_causes = current_user.causes
+    causes = [cause.to_dict() for cause in all_causes]
+    return render_template('myfundraiser.html', causes=causes)
+
+@app.route('/my-donations', methods=['GET'])
+def my_donations():
+    """ Return all my donations"""
+    my_donations = current_user.donations
+    donations = [donation.to_dict() for donation in my_donations]
+    return render_template('mydonations.html', donations=donations)
+
+@app.route('/my-account', methods=["GET", "POST"])
+def my_account():
+    """ Display account details"""
+    if request.method == "GET":
+        return render_template('account.html')
+    
+    email = request.form.get('email')
+    first_name = request.form.get('f-name')
+    last_name = request.form.get('l-name')
+    print('Tried changing details')
+    return redirect('dashboard')
 
 @app.route("/causes", methods=["GET"])
 def causes():
@@ -202,22 +228,15 @@ def create_cause():
     )
     database.add(cause)
     # user posted a cause or sth
-    return redirect(url_for("dashboard", user_id=user_id))
+    return redirect(url_for("dashboard"))
 
 
-@app.route("/search-causes", methods=["POST", "GET"])
-def search_causes():
-    cause_name = unwrap(request.form.get("query"))
-    cause_name_lower = cause_name.lower()
-    all_causes = database.session.query(Cause).all()
-    causes = [c.to_dict() for c in all_causes if cause_name_lower in c.name.lower()]
-    data = {"results": causes}
-    return success_response(data), 200
-
-
-@app.route("/donate", methods=["POST"])
+@app.route("/donate", methods=["POST", "GET"])
 @login_required
 def donate():
+    if request.method == "GET":
+        return render_template('donate.html')
+    
     user_id = request.form.get("user_id")
     cause_id = request.form.get("cause_id")
     amount_str = request.form.get("amount")
@@ -243,7 +262,7 @@ def donate():
     # cause.update()
     # user.update()
     # donation_dict = donation.to_dict()
-    return redirect(url_for("index"))
+    return redirect(url_for("my_donations"))
 
 
 def main() -> None:

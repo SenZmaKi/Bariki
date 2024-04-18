@@ -28,19 +28,20 @@
             <h2>Account Details</h2>
     </header>
     </div>
-    <form class="form-container">
+    <form class="form-container" action="{{ url_for('my_account') }}" method="POST">
       <div class="form-group">
-          <label for="name">First Name:</label>
-          <input type="text" id="name" name="name" placeholder="First Name" required>
+          <label for="name">First Name: {{ current_user.first_name }}</label>
+          <input type="text" id="name" name="f-name" placeholder="First Name" required>
       </div>
       <div class="form-group">
-          <label for="description">Second Name:</label>
-          <textarea id="description" name="description" placeholder="Second Name" required></textarea>
+          <label for="description">Second Name: {{ current_user.second_name }}</label>
+          <textarea id="description" name="l-name" placeholder="Second Name" required></textarea>
       </div>
       <div class="form-group">
-        <label for="account">Email Address:</label>
+        <label for="account">Email Address: {{ current_user.email }}</label>
         <input type="text" id="account" name="account" placeholder="Email address" required>
     </div>
-      
+    <button type="submit">Change details</button>
+      </form>
 </body>
 </html>
