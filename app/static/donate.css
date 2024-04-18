@@ -1,0 +1,195 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: black;
+}
+
+.begin {
+    position: relative;
+    height: 10vh; /* Full viewport height */
+    width: 100%;
+    color: white;
+    font-weight: 800;
+    background-image: url('../static/images/watu.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    margin-bottom: 10px;
+}
+
+.begin::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+  z-index: 0;
+}
+ h3{
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+ }
+.manage{
+    margin-left: 520px; /* Adjust according to the sidebar width */
+margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: white;
+font-weight: 500;
+font-size: 30px;
+position: relative;
+    display: inline-block;
+ }
+ 
+
+ .manage h3::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Start with no underline */
+    height: 2px; /* Thickness of the underline */
+    background-color: darkblue; /* Color of the underline */
+    animation: underline-grow 0.5s ease forwards; /* Animation settings */
+ }
+ .start h3 {
+    position: relative;
+    display: inline-block; /* Limit the underline to the text width */
+}
+
+.start h3::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Start with no underline */
+    height: 2px; /* Thickness of the underline */
+    background-color: darkblue; /* Color of the underline */
+    animation: underline-grow 0.5s ease forwards; /* Animation settings */
+}
+
+@keyframes underline-grow {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+
+
+ .gallery {
+    margin-left: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.fundraiser-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+    margin: 20px;
+    overflow: hidden;
+}
+
+.fundraiser-image img {
+    width: 100%;
+    height: auto;
+}
+
+.fundraiser-info {
+    padding: 15px;
+}
+
+.fundraiser-info h3 {
+    color: black;
+    margin-top: 0;
+}
+
+.fundraiser-info p {
+    font-weight: 600;
+    color: black;
+    font-size: 14px;
+    line-height: 1.5;}
+
+    h4{
+        color: white;
+        position: relative;
+        align-content: center;
+        justify-content: center;
+    }
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    
+    
+    .form-container {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+        padding-left: 150px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    background-image: url(../static/images/nyeus.jpeg);    
+    }
+    
+    .form-group {
+        margin-bottom: 15px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-family: "Sedan", serif;
+        font-weight: 500;
+        color: whitesmoke;
+        font-size: 20px;
+    }
+    input[type="file"]{
+        color: white;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="file"],
+    textarea,
+    button[type="submit"] {
+        width: 50%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    button[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    
+    button[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    
+    textarea {
+        resize: vertical;
+    }
+
