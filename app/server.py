@@ -74,8 +74,6 @@ def index():
     # if current_user.is_authenticated:
     #     return redirect(url_for("dashboard", user_id=current_user.id))
 
-    if not is_authenticated():
-        return redirect(url_for("login"))
     if request.method == "POST":
         req_json = request.get_json()
         print("donation attempt")
@@ -264,6 +262,7 @@ def donation_page():
 def donate():
     user_id = current_user.id
     cause_id = request.form.get("cause_id")
+    print("user_id:", user_id, "cause_id:", cause_id)
     amount_str = request.form.get("amount")
     amount = int(unwrap(amount_str))
     user = database.session.query(User).filter_by(id=user_id).first()
@@ -277,6 +276,7 @@ def donate():
     # To avoid the transaction failing incase account balance < amount + TRANSACTION_FEE
     to_add = amount + algo.TRANSACTION_FEE
     # We assume some fake bank transactions took place
+    print(user_account_address)
     algo.add_funds(to_add, user_account_address)  # pyright: ignore
     algo.donate(amount, user_account_address, cause_account_address)  # pyright: ignore
     new_balance = algo.get_balance(cause_account_address)  # pyright: ignore

@@ -26,7 +26,15 @@ function CarouselCardSlider() {
         "Content-Type": "application/json",
       },
       body: data_json,
-    });
+    })
+      .then((response) => response.text())
+      .then((htmlString) => {
+        // Replace the content of the entire body with the received HTML string
+        document.body.innerHTML = htmlString;
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
