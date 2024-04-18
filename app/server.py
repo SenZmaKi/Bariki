@@ -72,7 +72,11 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 def index():
     if current_user.is_authenticated:
         return redirect(url_for("dashboard", user_id=current_user.id))
-    causes = database.session.query(Cause).all()
+    causes = database.all(Cause)
+    all_causes = list()
+    for cause in causes.values():
+        all_causes.append(cause.to_dict())
+    print(all_causes)
     return render_template("index.html", causes=causes)
 
 
