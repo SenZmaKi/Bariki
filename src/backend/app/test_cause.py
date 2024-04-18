@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ Test db """
-from models.user import User
-from models.cause import Cause
+# from ..models.user import User
+User = __import__('app.models.user').User
+from app.models.cause import Cause
 from models.donation import Donation
 from models import database as db
 from datetime import datetime, timedelta

@@ -63,7 +63,7 @@ class BaseModel:
             # for 'cause' instances
             new_dict["deadline"] = new_dict["deadline"].strftime(TIME_FORMAT)
         new_dict["__class__"] = self.__class__.__name__
-        if "_sa_instance_state" in new_dict:
+        if new_dict.get("_sa_instance_state"):
             del new_dict["_sa_instance_state"]  # sqlalchemy added
         if "hashed_password" in new_dict:
             del new_dict["hashed_password"] # allow ?

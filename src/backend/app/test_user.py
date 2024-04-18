@@ -17,7 +17,7 @@ def test_create_user():
     try:
         database.add(new_user)
     except Exception as e:
-        print("Error creating user {e}")
+        print(f"Error creating user {e}")
     else:
         print(f"User created successfully {user_id}")
     return user_id
@@ -39,6 +39,8 @@ def get_all_users():
         obj = database.get(User, obj_id)
         users.append(obj.to_dict())
     return users
+
+def get_user_donations():
 
 if __name__ == "__main__":
     u_id = test_create_user()

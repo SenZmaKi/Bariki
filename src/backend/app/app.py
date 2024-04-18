@@ -62,7 +62,7 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
     return jsonify({"status": "success", "data": data})
 
 
-@app.route("/login", methods=["POST"])
+@app.route("/login", methods=["POST, GET"])
 def login():
     email = request.form.get("email")
     users = (
@@ -133,6 +133,16 @@ def logout():
     return "<h1> Home Page</h1>"
 
 
+@app.route("/causes/", strict_slashes=False)
+def causes():
+    """ API endpoint to return all causes ongoing """
+    all_causes = database.all(Cause)
+    causes = list()
+    for u in all_causes:
+        obj_id = _id(u)
+        obj = database.get(Cause, obj_id)
+        causes.append(obj.to_dict())
+    return jsonify(causes), 200
 def main() -> None:
     app.run(debug=True)
 
