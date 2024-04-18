@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage fundraiser</title>
-    <link rel="stylesheet" href="../static/myfundraiser.css">
+    <title>Donate</title>
+    <link rel="stylesheet" href="../static/donate.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sedan:ital@0;1&display=swap" rel="stylesheet">
@@ -19,14 +19,10 @@
         </div>
 
         <div class="back">
-            <div class="manage">
-                <h3>Your Fundraisers</h3>
-        
+            <h2>Your donations</h2>
+            {% for donation in donations%}
+                <p>{{ donation.amount }} donated to {{ donation.cause.name }}</p>
             </div>
-
-            {% for cause in causes %}
-                <p>{{ cause.name }}</p>
             {% endfor %}
-        </div>
 </body>
 </html>
