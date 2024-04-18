@@ -9,8 +9,8 @@
 }
 
 body{
-    background-color: #c9d6ff;
-    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    background-color: #121215;
+    /* background: linear-gradient(to right, #e2e2e2, #c9d6ff); */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -19,7 +19,7 @@ body{
 }
 
 .container{
-    background-color: #fff;
+    background-color: #1e1e20;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
@@ -34,6 +34,7 @@ body{
     line-height: 20px;
     letter-spacing: 0.3px;
     margin: 20px 0;
+    color: #fff;
 }
 
 .container span{
@@ -41,11 +42,16 @@ body{
 }
 
 .container a{
-    color: #333;
+    color: #f8f2f2;
     font-size: 13px;
     text-decoration: none;
     margin: 15px 0 10px;
 }
+
+label {
+    color: white; /* Sets the text color to white for all label elements */
+}
+  
 
 .container button{
     background-color: #512da8;
@@ -67,13 +73,18 @@ body{
 }
 
 .container form{
-    background-color: #fff;
+    background-color: #1e1e20;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding: 0 40px;
     height: 100%;
+}
+
+.container h1{
+    color: #ffffff;
+    margin-bottom: 6px;
 }
 
 .container input{
@@ -208,4 +219,37 @@ body{
 
 .container.active .toggle-right{
     transform: translateX(200%);
+}
+
+/* Styles for the link that wraps the button */
+a button {
+    display: flex;
+    margin-bottom: 20px;
+    background-color: #512da8;  /* Blue background */
+    color: white;              /* White text */
+    border: none;              /* No border */
+    padding: 10px 20px;        /* Padding around the text */
+    border-radius: 5px;        /* Rounded corners */
+    text-transform: uppercase; /* Uppercase text */
+    font-weight: bold;         /* Bold text */
+    cursor: pointer;           /* Pointer cursor on hover */
+    text-decoration: none;     /* No underline */
+    display: inline-block;     /* Necessary to apply padding and margins correctly */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+/* Hover effect */
+a button:hover {
+    background-color: #0056b3; /* A darker blue when hovered */
+}
+
+/* Focus style */
+a button:focus {
+    outline: none;             /* Remove the default focus outline */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Custom focus style */
+}
+
+/* Active state style */
+a button:active {
+    transform: scale(0.98);    /* Slightly scale down when clicked */
 }

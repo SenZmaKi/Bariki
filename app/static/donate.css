@@ -161,17 +161,18 @@ position: relative;
         font-weight: 500;
         color: whitesmoke;
         font-size: 20px;
+        padding-left: 40px;
+
     }
     input[type="file"]{
         color: white;
     }
-    input[type="text"],
     input[type="number"],
-    input[type="date"],
-    input[type="file"],
     textarea,
     button[type="submit"] {
         width: 50%;
+       margin-left: 90px;
+
         padding: 8px;
         border: 1px solid #ccc;
         border-radius: 4px;
@@ -182,6 +183,8 @@ position: relative;
         color: white;
         border: none;
         cursor: pointer;
+        padding-left: 40px;
+
     }
     
     button[type="submit"]:hover {

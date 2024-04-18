@@ -20,15 +20,11 @@
     <div class="sidebar">
         <div class="section">
             <h2>MY ACCOUNT</h2>
-            <a href="#" class="nav-item"><img src="../static/images/fundraising.png" style="padding: 5px;" > My Fundraisers</a>
-            <a href="#" class="nav-item"><img src="../static/images/donation.png" style="padding: 5px;" > My Donations</a>
-            <a href="#" class="nav-item"><img src="../static/images/profile.png" style="padding: 5px;" > Account details</a>
+            <a href="{{ url_for('my_fundraisers') }}" class="nav-item"><img src="../static/images/fundraising.png" style="padding: 5px;" > My Fundraisers</a>
+            <a href="{{ url_for('my_donations') }}" class="nav-item"><img src="../static/images/donation.png" style="padding: 5px;" > My Donations</a>
+            <a href="{{ url_for('my_account') }}" class="nav-item"><img src="../static/images/profile.png" style="padding: 5px;" > Account details</a>
         </div>
-        <!-- <div class="section">
-            <h2>PERSONALIZATION</h2>
-            <a href="#" class="nav-item"><img src="icons/summary-icon.svg" > Fundraiser Details</a>
-            <a href="#" class="nav-item"><img src="icons/summary-icon.svg" > Share</a>
-        </div> -->
+
         <div class="section">
             <h2>ACCOUNT</h2>
           <a href="{{ url_for('logout')}}" class="nav-item"><img src="../static/images/logout.png" style="padding: 5px;" > Logout</a>
@@ -52,8 +48,8 @@
         <h3>Your Active Fundraisers</h3>
 
     </div>
-    
 
+    {% for cause in active_causes %}
     <div class="gallery">
         <div class="fundraiser-card">
             {% for c in current_user.causes %}
@@ -69,8 +65,8 @@
             {% endfor %}
           </div>
         </div>
-        <!-- Additional fundraiser cards can be added here -->
-    </div>
+    </div> 
+    {% endfor %}
 </div>
 </body>
 </html>

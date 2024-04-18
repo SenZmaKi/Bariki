@@ -18,13 +18,13 @@
         <div class="form-container sign-up">
             <form method="POST" action="{{ url_for('signup') }}">
                 <h1>Create Account</h1>
-                <div class="social-icons">
+                <!--<div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email for registeration</span>
+                </div>-->
+                <!--<span>or use your email for registeration</span>-->
                 <input type="text" placeholder="First name" name="f-name">
                 <input type="text" placeholder="Last name" name="l-name">
                 <input type="email" placeholder="Email" name="email">
@@ -37,16 +37,16 @@
         <div class="form-container sign-in">
             <form method="POST" action="{{ url_for('login') }}">
                 <h1>Sign In</h1>
-                <div class="social-icons">
+                <!-- <div class="social-icons">
                     <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
                     <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                </div>
-                <span>or use your email password</span>
+                </div> -->
+                <!-- <span>or use your email password</span> -->
                 <input type="email" placeholder="Email" name="email">
                 <input type="password" placeholder="Password" name="password">
-                <a href="#">Forget Your Password?</a>
+                <a href="#">Forgot Your Password?</a>
                 <button type="submit">Login</button>
             </form>
         </div>

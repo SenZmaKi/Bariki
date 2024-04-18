@@ -279,7 +279,7 @@ margin-right: 10%;
 
   .deliveries{
     font-family: "Sedan", serif;
-
+    padding: 10px;
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -288,14 +288,14 @@ margin-right: 10%;
     text-align: center;
     color: #bababa;
     border-radius: 20px;
- 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     margin-bottom: 50px;
-    background-color: #7d92ac;
+    background-color: #092b43;
   }
 
   .safety{
     font-family: "Sedan", serif;
-
+    padding: 10px;
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -304,14 +304,14 @@ margin-right: 10%;
     text-align: center;
     color: #bababa;
     border-radius: 20px;
-    /* margin-left: 200px; */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     margin-bottom: 50px;
-    background-color: #db6f3c;;
+    background-color: #092b43;
   }
 
   .tracking{
     font-family: "Sedan", serif;
-
+    padding: 10px;
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -320,14 +320,14 @@ margin-right: 10%;
     text-align: center;
     color: #bababa;
     border-radius: 20px;
-    
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     margin-bottom: 50px;
-    background-color: #7d92ac;
+    background-color: #092b43;
   }
 
   .inventory{
     font-family: "Sedan", serif;
-
+    padding: 10px;
     width: 30%;
     height: 80%;
     justify-content: center;
@@ -336,9 +336,9 @@ margin-right: 10%;
     text-align: center;
     color: #bababa;
     border-radius: 20px;
-   
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     margin-bottom: 50px;
-    background-color: #db6f3c;;
+    background-color: #092b43;
   }
 
   .ian{
