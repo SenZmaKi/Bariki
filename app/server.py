@@ -38,10 +38,8 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    print("---- user loader -----")
-    data = database.session.query(User).get(user_id)
-    print(data)
-    return data
+    """ User loader for session mngt """
+    return database.session.query(User).get(user_id)
 
 
 def hash_password(password):
@@ -180,10 +178,12 @@ def causes():
 
 @app.route("/createcause", methods=["POST", "GET"], strict_slashes=False)
 @login_required
-def create_cause(user_id):
+def create_cause():
+    """ create a cause """
     if request.method == "GET":
         return render_template("createcause.html")
 
+    user_id = request.args.get("user_id")
     name = request.form.get("name")
     description = request.form.get("description")
     goal_amount = request.form.get("goal_amount")
@@ -201,7 +201,7 @@ def create_cause(user_id):
     return redirect(url_for("dashboard", user_id=user_id))
 
 
-@app.route("/search-causes", methods=["POST"])
+@app.route("/search-causes", methods=["POST", "GET"])
 def search_causes():
     cause_name = unwrap(request.form.get("query"))
     cause_name_lower = cause_name.lower()
