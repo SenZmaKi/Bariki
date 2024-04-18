@@ -1,0 +1,144 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black; /* Light gray background for the body */
+  }
+  
+  
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    
+  }
+  .ubunifu {
+   
+    height: 59px;
+  
+    float: left;
+    width: max-content;
+    color: #C42B1B;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 800;
+  
+  }
+  
+  .ubunifu img{
+    display: flex;
+    margin-right: 80px;
+    margin-bottom: 20px;
+  }
+  
+  
+  .begin {
+      position: relative;
+      height: 20vh; /* Full viewport height */
+      width: 100%;
+      background-image: url('../static/images/watu.jpg'); /* Path to your background image */
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center; /* Center content vertically */
+      justify-content: center; /* Center content horizontally */
+      margin-bottom: 40px;
+  }
+  
+  .begin::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* Black overlay with 50% opacity */
+    z-index: 0;
+  }
+  
+  h1 {
+    font-family: "Sedan", serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 40px;
+    position: relative;
+    color: white; /* White color for the header text */
+    text-align: center;
+    z-index: 1; /* Ensures the text appears above the overlay */
+    animation: fadeIn 2s ease-out 0s 1 normal forwards;
+  
+  }
+  h2{
+    font-family: "Sedan", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 30px;
+      position: relative;
+      color: white; /* White color for the header text */
+      text-align: center;
+      z-index: 1; /* Ensures the text appears above the overlay */
+      animation: fadeIn 2s ease-out 0s 1 normal forwards;
+  
+  }
+
+  
+    /* Basic Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+background-image: url(../static/images/nyeus.jpeg);    
+margin-left: 30%;}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-family: "Sedan", serif;
+    font-weight: 500;
+    color: whitesmoke;
+    font-size: 20px;
+}
+input[type="file"]{
+    color: white;
+}
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="file"],
+textarea,
+button[type="submit"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+textarea {
+    resize: vertical;
+}
