@@ -31,21 +31,22 @@
                         <img src="../static/images/whale.png"  alt="Fundraiser Header">
                     </div>
                     <div class="fundraiser-info">
-                        <h3>Name: Save the Whales>
-                        <p>Description: Help us raise funds to protect the whales in the Pacific Ocean from illegal hunting and pollution.</p>
-                        <p>Goal Amount: KSH 500,000</p>
-                        <p>Deadline: 2023-12-31</p>
-                        <p>Algo Account: XXXXXALGORANDXXXXX</p>
+                        <h3>Name: {{ cause.name }}</h3>
+                        <p>Description: {{ cause.description }}</p>
+                        <p>Goal Amount: KSH {{ cause.goal_amount }}</p>
+                        <p>Deadline: {{ cause.deadline }}</p>
                     </div>
                 </div>
                 <!-- Additional fundraiser cards can be added here -->
             </div>
 
-            <form class="form-container" method="POST" action="{{ url_for('create_cause', user_id=current_user.id) }}">
+            <form class="form-container" method="POST" action="{{ url_for('donate', user_id=current_user.id) }}">
                
                 <div class="form-group">
-                    <label for="goal">How much do you want to donate?(KSH):</label>
-                    <input type="number" id="goal" name="goal" min="1" step="1" placeholder="Enter amount" required>
+                    <label for="amount">How much do you want to donate?(KSH):</label>
+                    <input type="number" id="amount" name="amount" min="1" step="1" placeholder="Enter amount" required>
+                    <input type="hidden" name="cause_id" value={{ cause.id}}>
+                    
                 </div>
                
                 <div class="form-group">
