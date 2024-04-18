@@ -12,6 +12,7 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="../static/Index.js" type="text/babel"></script>
 </head>
 <body>
     <div class="back">
@@ -34,71 +35,48 @@
                   </div> 
                 
                 
+                <a href="#updates"><i class="fa fa-fw fa-envelope"></i> ABOUT US </a>
                 
-              <a href="#updates"><i class="fa fa-fw fa-envelope"></i> ABOUT US </a>
-              
-             
-              <a href="#contact"><i class="fa fa-fw fa-search"></i> CONTACT</a>
-  
-              
-              <a href="#menu"><i class="fa fa-fw fa-search"></i> </a>
-              
-            </div>
-          </div>
-        </div>
-    <div class="begin">
-    <header>
-        <h1> BARIKI FOUNDATION <br>
-              <h2>Transparent. Secure. Efficient</h2>
-    </header>
-</div>
-    
-    <div id="react-root"></div> <!-- React will render your components here -->
-
-    <script type="text/babel">
-      // Define your React components
-      function FundraiserBanner() {
-          return (
-              <div className="fundraising-banner">
-                  <div className="content">
-                      <h1>Get started with Bariki<br/></h1>
-                      <div className="actions">
-                          <button className="start-button">START TODAY</button>
-                          <div className="search-box">
-                              <input type="text" placeholder="Find a Fundraiser..." />
-                             
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          );
-      }
-
-      function BarikiFoundation() {
-          return (
-              <div className="begin">
+                
+                <a href="#contact"><i class="fa fa-fw fa-search"></i> CONTACT</a>
+                
+                
+                <a href="#menu"><i class="fa fa-fw fa-search"></i> </a>
+                
+                </div>
+                </div>
+                </div>
+                <div class="begin">
                   <header>
-                      <h1> BARIKI FOUNDATION <br/>
-                          <h2>Transparent,Secure and Efficient</h2>
-                      </h1>
+                    <h1> BARIKI FOUNDATION <br>
+                      <h2>Transparent. Secure. Efficient</h2>
                   </header>
-              </div>
-          );
-      }
+                </div>
+                
+                
+                <div class="fundraising-banner">
+                  <div class="content">
+                    <h1>Get started with Bariki<br /></h1>
+                    <div class="actions">
+                      <button class="start-button">START TODAY</button>
+                      <div class="search-box">
+                        <input type="text" placeholder="Find a Fundraiser..." />
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="react-root"></div> <!-- React will render your components here -->
 
-      function App() {
-          return (
-              <>
-                  <FundraiserBanner />
-           
-                  {/* You can add more components here as needed */}
-              </>
-          );
-      }
 
-      // Render your React application to the mount point
-      ReactDOM.render(<App />, document.getElementById('react-root'));
-  </script>
+                <div class="begin">
+                  <header>
+                    <h1> BARIKI FOUNDATION <br />
+                      <h2>Transparent,Secure and Efficient</h2>
+                    </h1>
+                  </header>
+                </div>
 
 <main>
   <section id="intro">
