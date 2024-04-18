@@ -4,17 +4,21 @@
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
-from flask import Response, jsonify, Flask, request, flash, redirect, url_for
-from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask import Response, jsonify, Flask, request, redirect, url_for
+from flask_login import (
+    LoginManager,
+    login_required,
+    login_user,
+    logout_user,
+    current_user,
+)
 from flask.templating import render_template
 from werkzeug.security import check_password_hash, generate_password_hash
 import hashlib
 
 from app.models import database
-from app.models.donation import Donation
 from app.models.user import User
 from app.models.cause import Cause
-from uuid import uuid4
 import time
 # from app import algo
 
@@ -24,16 +28,17 @@ if not UPLOAD_FOLDER.is_dir():
     os.mkdir(UPLOAD_FOLDER)
 
 app = Flask(__name__)
-app.secret_key = b'_5#y2L"F4Q8z\n\xec]/' # TODO : replace with more secure?
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # TODO : replace with more secure?
 
 T = TypeVar("T")
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 
+
 @login_manager.user_loader
 def load_user(user_id):
-    print('---- user loader -----')
+    print("---- user loader -----")
     data = database.session.query(User).get(user_id)
     print(data)
     return data
@@ -68,15 +73,16 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 @app.route("/")
 def index():
     if current_user.is_authenticated:
-        return redirect(url_for('dashboard', user_id=request.current_user.id))
+        return redirect(url_for("dashboard", user_id=current_user.id))
     causes = database.session.query(Cause).all()
     return render_template("index.html", causes=causes)
+
 
 @app.route("/signup/", methods=["POST", "GET"], strict_slashes=False)
 def signup():
     if request.method == "GET":
-        return render_template('login.html')
-    
+        return render_template("login.html")
+
     print("Signing up")
     print(request.form)
     first_name = request.form.get("f-name")
@@ -84,10 +90,9 @@ def signup():
     email = request.form.get("email")
     potential_user = database.session.query(User).filter_by(email=email).first()
     if potential_user is not None:
-        flash("Account already exists, login")
-        time.sleep(5) # for user to see the message?
-        return redirect(url_for('login'))
-        
+        time.sleep(5)  # for user to see the message?
+        return redirect(url_for("login"))
+
     password = cast(str, request.form.get("password"))
     hashed_password = generate_password_hash(password)
     # hashed_password = hash_password(password)
@@ -103,20 +108,17 @@ def signup():
     # Add the new_user to the database session
     database.add(user)
     if not user:
-        flash("Error creating a user")
-        time.sleep(5)
-        return redirect(url_for('signup'))
+        return redirect(url_for("signup"))
     print("User created")
     print(user.to_dict())
-    flash("User created successfully, please log in")
-    return redirect(url_for('login'))
+    return redirect(url_for("login"))
 
 
 @app.route("/login/", methods=["POST", "GET"], strict_slashes=False)
 def login():
     if request.method == "GET":
-        return render_template('login.html')
-    
+        return render_template("login.html")
+
     print("Logging in")
     print(request.form)
     email = request.form.get("email")
@@ -135,35 +137,37 @@ def login():
     # that the password specifically is what is invalids reveals that the email
     # exists in our database, but for better easier debugging during devt I've kept it
     if not user:
-        flash("Invalid email")
         return error_response("Invalid email"), 401
-    
+
     print(user.to_dict())
     if check_password_hash(user.hashed_password, password):
         login_user(user)
         print(current_user.is_authenticated)
-        return redirect(url_for('dashboard', user_id=user.id))
-    
-    flash('Wrong password, try again')
-    return redirect(url_for('login'))
+        return redirect(url_for("dashboard", user_id=user.id))
 
-@app.route('/logout', methods=['POST'], strict_slashes=False)
+    return redirect(url_for("login"))
+
+
+@app.route("/logout", methods=["POST", "GET"], strict_slashes=False)
 @login_required
 def logout():
-    """ Logout user """
+    """Logout user"""
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for("login"))
 
-@app.route('/dashboard', methods=["GET"])
+
+@app.route("/dashboard", methods=["GET"])
 @login_required
-def dashboard(user_id):
-    """ Dashboard"""
+def dashboard():
+    """Dashboard"""
+    user_id = request.args.get("user_id")
+    # Now you have access to the user_id
+    print(user_id)
     print(current_user)
     # get user
     # get user's causes
     # get user's donations
-    return render_template('dashboard.html')
-    
+    return render_template("dashboard.html")
 
 
 @app.route("/causes", methods=["GET"])
@@ -174,15 +178,12 @@ def causes():
     return success_response(data), 200
 
 
-
-
-
 @app.route("/create-cause", methods=["POST, GET"], strict_slashes=False)
 @login_required
 def create_cause(user_id):
     if request.method == "GET":
-        return render_template('createcause.html')
-    
+        return render_template("createcause.html")
+
     name = request.form.get("name")
     description = request.form.get("description")
     goal_amount = request.form.get("goal_amount")
@@ -196,9 +197,8 @@ def create_cause(user_id):
         user_id=user_id,
     )
     database.add(cause)
-   # user posted a cause or sth
-    flash("Cause created successfuly")
-    return redirect(url_for('dashboard', user_id=user_id))
+    # user posted a cause or sth
+    return redirect(url_for("dashboard", user_id=user_id))
 
 
 @app.route("/search-causes", methods=["POST"])
@@ -239,7 +239,7 @@ def donate():
     # cause.update()
     # user.update()
     # donation_dict = donation.to_dict()
-    return redirect(url_for('index'))
+    return redirect(url_for("index"))
 
 
 def main() -> None:
