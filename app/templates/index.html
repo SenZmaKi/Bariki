@@ -13,6 +13,9 @@
     <!-- Don't use this in production: -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="../static/Index.js" type="text/babel"></script>
+    <script type="text/javascript">
+      var causes = {{ causes | tojson  }}
+    </script>
 </head>
 <body>
   {% with messages = get_flashed_messages(with_categories=true) %}
@@ -82,7 +85,9 @@
                     </div>
                   </div>
                 </div>
-                
+
+        <div id="data" data-set={{ causes}}>
+              </div> 
                 <div id="react-root"></div> <!-- React will render your components here -->
 
 
@@ -143,7 +148,7 @@
                               <div class="tracking">
                                   <p>
                                     <img src="../static/images/efficient.png" style="height: 40px;" alt=""><br>
-                                    <span style=" color: #fff; font-weight: 700;">Efficienct</span><br>
+                                    <span style=" color: #fff; font-weight: 700;">Efficient<><br>
                                     <br>
                                     <br>
                                     The Bariki Blockchain Foundation excels in operational efficiency,

@@ -31,8 +31,8 @@
           <h2>Fill out the fields below to gets started</h2>
 </header>
 </div>
-<form class="form-container">
-  <div class="form-group">
+<form class="form-container" method="POST" action="{{ url_for('create_cause', user_id=current_user.id) }}">
+  <div class="form-group" >
       <label for="name">Fundraiser Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your fundraiser's name" required>
   </div>
