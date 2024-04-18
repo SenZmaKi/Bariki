@@ -40,8 +40,6 @@ def get_all_users():
         users.append(obj.to_dict())
     return users
 
-def get_user_donations():
-
 if __name__ == "__main__":
     u_id = test_create_user()
     test_get_user(u_id)
