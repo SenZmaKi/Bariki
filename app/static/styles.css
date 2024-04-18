@@ -350,10 +350,14 @@ margin-right: 10%;
 
     background-color: #141414;
     justify-content: center;
-    height: 50px;
+    height: 100px;
     width: 100%;
     display: flex;
    color: white;
+ }
+
+ .copy p{
+  margin: auto;
  }
 
  /* SLIDER */
