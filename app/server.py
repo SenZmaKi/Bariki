@@ -178,10 +178,12 @@ def causes():
 
 @app.route("/create-cause", methods=["POST, GET"], strict_slashes=False)
 @login_required
-def create_cause(user_id):
+def create_cause():
+    """ create a cause """
     if request.method == "GET":
         return render_template("createcause.html")
 
+    user_id = request.args.get("user_id")
     name = request.form.get("name")
     description = request.form.get("description")
     goal_amount = request.form.get("goal_amount")
