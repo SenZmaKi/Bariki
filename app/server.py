@@ -38,7 +38,7 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
-    """ User loader for session mngt """
+    """User loader for session mngt"""
     return database.session.query(User).get(user_id)
 
 
@@ -72,13 +72,10 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
 def index():
     if current_user.is_authenticated:
         return redirect(url_for("dashboard"))
-    causes = database.all(Cause)
-    all_causes = list()
-    for cause in causes.values():
-        all_causes.append(cause.to_dict())
-    print(all_causes)
-    return render_template("index.html", causes=causes)
-
+    
+    causes = database.session.query(Cause).all()
+    causes_dict = [c.to_dict() for c in causes]
+    return render_template("index.html", causes=causes_dict)
 
 @app.route("/signup/", methods=["POST", "GET"], strict_slashes=False)
 def signup():
@@ -206,13 +203,13 @@ def causes():
     return success_response(data), 200
 
 
-@app.route("/create-cause", methods=["POST, GET"], strict_slashes=False)
+@app.route("/createcause", methods=["POST", "GET"], strict_slashes=False)
 @login_required
 def create_cause():
-    """ create a cause """
+    """create a cause"""
     if request.method == "GET":
         return render_template("createcause.html")
-    
+
     print(request.form)
     user_id = request.args.get("user_id")
     name = request.form.get("name")

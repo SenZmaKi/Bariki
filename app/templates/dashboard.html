@@ -14,7 +14,7 @@
     
     <div class="begin">
         <header>
-            <h1> Welcome {{ current_user.first_name }}<br>
+            <h1> Welcome {{ current_user.first_name }}<h1>
         </header>
         </div>
     <div class="sidebar">
@@ -39,7 +39,7 @@
     
         </div>
 
-        <button class="large-button"><img src="../static/images/plus.png" style="padding: 5px;"> Create New Fundraiser</button>
+          <a href="{{ url_for('create_cause', user_id=current_user.id) }}"><button class="large-button"><img src="../static/images/plus.png" style="padding: 5px;"> Create New Fundraiser</button></a>
     </div>
 </div>
 
@@ -52,15 +52,18 @@
     {% for cause in active_causes %}
     <div class="gallery">
         <div class="fundraiser-card">
-            <div class="fundraiser-image">
-        <img src="{{ cause.img_url }}"  alt="Fundraiser Header">
-            </div>
-            <div class="fundraiser-info">
-                <h3>Name: {{ cause.name }}
-                <p>Description: {{ cause.description }}</p>
-                <p>Goal Amount: {{ cause.goal_amount }}</p>
-                <p>Deadline: {{ cause.deadline }}</p>
-            </div>
+            {% for c in current_user.causes %}
+              <div class="fundraiser-image">
+                  <img src="{{ c.image_url }}"  alt="Fundraiser Header">
+              </div>
+              <div class="fundraiser-info">
+              <h3> Name: {{ c.name }}</h3>
+              <p>Description: {{c.description}}</p>
+              <p>Goal Amount:{{c.goal_amount}}</p>
+              <p>Deadline: {{c.deadline}}</p>
+                <p></p>
+            {% endfor %}
+          </div>
         </div>
     </div> 
     {% endfor %}
