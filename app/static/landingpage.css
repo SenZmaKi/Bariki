@@ -126,6 +126,7 @@ font-weight: 500;
 font-size: 30px;
  }
  .gallery {
+    margin-left: 70px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -151,12 +152,13 @@ font-size: 30px;
 }
 
 .fundraiser-info h3 {
-    color: #333;
+    color: black;
     margin-top: 0;
 }
 
 .fundraiser-info p {
-    color: #666;
+    font-weight: 600;
+    color: black;
     font-size: 14px;
     line-height: 1.5;
 }
