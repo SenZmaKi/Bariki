@@ -178,7 +178,7 @@ def causes():
     return success_response(data), 200
 
 
-@app.route("/create-cause", methods=["POST, GET"], strict_slashes=False)
+@app.route("/createcause", methods=["POST", "GET"], strict_slashes=False)
 @login_required
 def create_cause(user_id):
     if request.method == "GET":
