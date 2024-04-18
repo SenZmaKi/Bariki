@@ -45,6 +45,10 @@ body, html {
     left: 0; /* Align sidebar to the left */
 }
 
+.back{
+    background-image: url('../static/images/nyeus.jpeg');
+    padding-bottom: 30px;
+}
 .main-content {
     color: white;
 align-content: center;    /* Other styles... */
@@ -105,7 +109,7 @@ h1 {
 }
  .start{
     margin-top: 20px;
-    margin-left: 400px; /* Adjust according to the sidebar width */
+    margin-left: 450px; /* Adjust according to the sidebar width */
 
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 color: white;
@@ -113,3 +117,11 @@ font-weight: 500;
 font-size: 30px;
  }
 
+ .manage{
+    margin-left: 520px; /* Adjust according to the sidebar width */
+margin-top: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+color: white;
+font-weight: 500;
+font-size: 30px;
+ }
