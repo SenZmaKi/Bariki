@@ -4,7 +4,7 @@
 from sqlalchemy import Column, DateTime, String
 from sqlalchemy.orm import declarative_base
 import uuid
-# from app import algo
+from app import algo
 from datetime import UTC, datetime
 from app import models
 
@@ -66,5 +66,5 @@ class AddressModel(BaseModel):
     """
 
     def __init__(self, **kwargs):
-        # self.algo_account_address = algo.create_account()
+        self.algo_account_address = algo.create_account()
         super().__init__(**kwargs)

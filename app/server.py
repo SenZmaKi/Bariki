@@ -20,7 +20,8 @@ from app.models import database
 from app.models.user import User
 from app.models.cause import Cause
 import time
-# from app import algo
+from app.models.donation import Donation
+from app import algo
 
 ROOT_DIR = Path(__file__).parent
 UPLOAD_FOLDER = ROOT_DIR / "uploads"
@@ -68,14 +69,23 @@ def success_response(data: dict[str, Any] | None = None) -> Response:
     return jsonify({"status": "success", "data": data})
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def index():
-    if current_user.is_authenticated:
-        return redirect(url_for("dashboard", user_id=current_user.id))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for("dashboard", user_id=current_user.id))
+
+    if not is_authenticated():
+        return redirect(url_for("login"))
+    if request.method == "POST":
+        req_json = request.get_json()
+        print("donation attempt")
+        cause_id = req_json["cause_id"]
+        return redirect(url_for("donation_page", cause_id=cause_id))
     causes = database.session.query(Cause).all()
     causes_dict = [c.to_dict() for c in causes]
     print(causes_dict)
     return render_template("index.html", causes=causes_dict)
+
 
 @app.route("/signup/", methods=["POST", "GET"], strict_slashes=False)
 def signup():
@@ -139,7 +149,7 @@ def login():
         return error_response("Invalid email"), 401
 
     print(user.to_dict())
-    if check_password_hash(user.hashed_password, password):
+    if check_password_hash(user.hashed_password, password):  # pyright: ignore
         login_user(user)
         print(current_user.is_authenticated)
         return redirect(url_for("dashboard", user_id=user.id))
@@ -212,10 +222,22 @@ def search_causes():
     return success_response(data), 200
 
 
-@app.route("/donate", methods=["POST"])
-@login_required
+def is_authenticated() -> bool:
+    return hasattr(current_user, "id") and current_user.is_authenticated
+
+
+@app.route("/donation_page", methods=["GET"])
+def donation_page():
+    cause_id = request.args.get("cause_id")
+    cause = unwrap(database.session.query(Cause).filter_by(id=cause_id).first())
+    cause_dict = cause.to_dict()
+    render = render_template("donate.html", cause=cause_dict)
+    return render
+
+
+@app.route("/donate", methods=["POST", "GET"])
 def donate():
-    user_id = request.form.get("user_id")
+    user_id = current_user.id
     cause_id = request.form.get("cause_id")
     amount_str = request.form.get("amount")
     amount = int(unwrap(amount_str))
@@ -225,22 +247,23 @@ def donate():
     cause = database.session.query(Cause).filter_by(id=cause_id).first()
     if cause is None:
         return error_response(f"Cause with id {cause_id} not found"), 404
-    # user_account_address = str(user.algo_account_address)
-    # user_account_address = str(uuid4())
-    # cause_account_address = str(cause.algo_account_address)
-    # # To avoid the transaction failing incase account balance < amount + TRANSACTION_FEE
-    # to_add = amount + algo.TRANSACTION_FEE
-    # # We assume some fake bank transactions took place
-    # algo.add_funds(to_add, user_account_address)
-    # algo.donate(amount, user_account_address, cause_account_address)
-    # new_balance = algo.get_balance(cause_account_address)
-    # cause.current_amount = new_balance  # pyright: ignore
-    # donation = Donation(cause_id=cause_id, user_id=user_id, amount=amount)
-    # database.add(donation)
-    # cause.update()
-    # user.update()
-    # donation_dict = donation.to_dict()
-    return redirect(url_for("index"))
+    user_account_address = user.algo_account_address
+    cause_account_address = cause.algo_account_address
+    # To avoid the transaction failing incase account balance < amount + TRANSACTION_FEE
+    to_add = amount + algo.TRANSACTION_FEE
+    # We assume some fake bank transactions took place
+    algo.add_funds(to_add, user_account_address)  # pyright: ignore
+    algo.donate(amount, user_account_address, cause_account_address)  # pyright: ignore
+    new_balance = algo.get_balance(cause_account_address)  # pyright: ignore
+    cause.current_amount = new_balance  # pyright: ignore
+    donation = Donation(cause_id=cause_id, user_id=user_id, amount=amount)
+    database.add(donation)
+    cause.update()
+    user.update()
+    donation_dict = donation.to_dict()
+    return redirect(
+        url_for("index", donation=donation_dict),
+    )
 
 
 def main() -> None:
