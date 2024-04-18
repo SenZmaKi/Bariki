@@ -14,7 +14,7 @@
     
     <div class="begin">
         <header>
-            <h1> MANAGE YOUR FUNDRAISERS <br>
+            <h1> Welcome {{ current_user.first_name }}<br>
         </header>
         </div>
     <div class="sidebar">
@@ -31,7 +31,7 @@
         </div> -->
         <div class="section">
             <h2>ACCOUNT</h2>
-            <a href="#" class="nav-item"><img src="../static/images/logout.png" style="padding: 5px;" > Logout</a>
+          <a href="{{ url_for('logout')}}" class="nav-item"><img src="../static/images/logout.png" style="padding: 5px;" > Logout</a>
         </div>
     </div>
     <div class="back">
@@ -60,7 +60,7 @@
                 <img src="../static/images/whale.png"  alt="Fundraiser Header">
             </div>
             <div class="fundraiser-info">
-                <h3>Name: Save the Whales</h3>
+                <h3>Name: Save the Whales<>
                 <p>Description: Help us raise funds to protect the whales in the Pacific Ocean from illegal hunting and pollution.</p>
                 <p>Goal Amount: KSH 500,000</p>
                 <p>Deadline: 2023-12-31</p>

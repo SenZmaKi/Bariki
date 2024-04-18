@@ -15,6 +15,22 @@
     <script src="../static/Index.js" type="text/babel"></script>
 </head>
 <body>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+           {{message}}
+           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+      {% endif %}
+      {% endwith %}
     <div class="back">
         <div class="color">
       <div class="container">
@@ -30,12 +46,12 @@
             
             
             <div class="drpdwn">
-              <a href="{{ url_for('signup')}}"><i class="fa fa-fw fa-search"></i> LOGIN</a>
+              <a href="{{ url_for('login')}}"><i class="fa fa-fw fa-search"></i> LOGIN</a>
             
                   </div> 
                 
                 
-                <a href="#updates"><i class="fa fa-fw fa-envelope"></i> ABOUT US </a>
+                <a href="#intro"><i class="fa fa-fw fa-envelope"></i> ABOUT US </a>
                 
                 
                 <a href="#contact"><i class="fa fa-fw fa-search"></i> FUNDRAISERS</a>
@@ -159,13 +175,11 @@
               </div>
            </div>
   </section>
+  <section id="contact">
+    <p style="color: white;">Contacts go here</p>
+  </section>
 </main>
 
-
-<div class="ian">
-  <p>
-</p>
-</div>
 <div class="copy"> &copy  2024. Bariki Foundation. All Rights Reserved 
 </div>
 </body>
