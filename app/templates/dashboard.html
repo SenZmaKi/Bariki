@@ -14,7 +14,7 @@
     
     <div class="begin">
         <header>
-            <h1> Welcome {{ current_user.first_name }}<br>
+            <h1> Welcome {{ current_user.first_name }}<h1>
         </header>
         </div>
     <div class="sidebar">
@@ -43,7 +43,7 @@
     
         </div>
 
-        <button class="large-button"><img src="../static/images/plus.png" style="padding: 5px;"> Create New Fundraiser</button>
+          <a href="{{ url_for('create_cause', user_id=current_user.id) }}"><button class="large-button"><img src="../static/images/plus.png" style="padding: 5px;"> Create New Fundraiser</button></a>
     </div>
 </div>
 
@@ -56,16 +56,18 @@
 
     <div class="gallery">
         <div class="fundraiser-card">
-            <div class="fundraiser-image">
-                <img src="../static/images/whale.png"  alt="Fundraiser Header">
-            </div>
-            <div class="fundraiser-info">
-                <h3>Name: Save the Whales>
-                <p>Description: Help us raise funds to protect the whales in the Pacific Ocean from illegal hunting and pollution.</p>
-                <p>Goal Amount: KSH 500,000</p>
-                <p>Deadline: 2023-12-31</p>
-                <p>Algo Account: XXXXXALGORANDXXXXX</p>
-            </div>
+            {% for c in current_user.causes %}
+              <div class="fundraiser-image">
+                  <img src="{{ c.image_url }}"  alt="Fundraiser Header">
+              </div>
+              <div class="fundraiser-info">
+              <h3> Name: {{ c.name }}</h3>
+              <p>Description: {{c.description}}</p>
+              <p>Goal Amount:{{c.goal_amount}}</p>
+              <p>Deadline: {{c.deadline}}</p>
+                <p></p>
+            {% endfor %}
+          </div>
         </div>
         <!-- Additional fundraiser cards can be added here -->
     </div>

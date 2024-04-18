@@ -32,7 +32,7 @@
 </header>
 </div>
 <form class="form-container" method="POST" action="{{ url_for('create_cause', user_id=current_user.id) }}">
-  <div class="form-group">
+  <div class="form-group" >
       <label for="name">Fundraiser Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your fundraiser's name" required>
   </div>
@@ -53,8 +53,8 @@
       <input type="date" id="deadline" name="deadline" required>
   </div>
   <div class="form-group">
-      <label for="account">Bank Account Address:</label>
-      <input type="text" id="account" name="account" placeholder="Enter your Algorand account address" required>
+      <label for="account">Bank account details: </label>
+      <input type="text" id="account" name="account" placeholder="Enter your Bank credentials" required>
   </div>
   <div class="form-group">
       <button type="submit" class="submit-btn">Submit</button>
