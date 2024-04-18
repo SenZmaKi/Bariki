@@ -355,7 +355,7 @@ margin-right: 10%;
  .slider-container {
   position: relative;
   width: 100%;
-  overflow: hidden;
+
 }
 
 .slider-wrapper {
@@ -364,9 +364,11 @@ margin-right: 10%;
 }
 
 .card {
-  flex: 0 0 auto;
-  width: 33.3333%;
+  background-color: #81b6bd;
+  position: relative;
+  width: 320px;
   padding: 20px;
+  border-radius: 25px;
   box-sizing: border-box;
   opacity: 0.5;
   transition: opacity 0.3s ease-in-out;

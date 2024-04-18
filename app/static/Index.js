@@ -20,8 +20,8 @@ function CarouselCardSlider() {
     };
 
     return (
-        <div className="slider-container ian">x
-            <div className="slider-wrappe ian">
+        <div className="slider-container">x
+            <div className="slider-wrapper">
                 {cards.map((card, index) => (
                     <div key={card.id} className={`card ${index === activeIndex ? 'active' : ''}`}>
                         <img src={card.imageUrl} alt={card.name} />
