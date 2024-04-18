@@ -7,6 +7,7 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
+    background-color: black;
 }
 
 .container {
@@ -16,39 +17,25 @@ body, html {
   
   
 }
-.ubunifu {
- 
-  height: 59px;
+.begin {
+    color: white;
 
-  float: left;
-  width: max-content;
-  color: #C42B1B;
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 800;
-
-}
-
-.ubunifu img{
-  display: flex;
-  margin-right: 700px;
+    position: relative;
+    height: 20vh; /* Full viewport height */
+    width: 100%;
+    background-image: url('../static/images/watu.jpg'); /* Path to your background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
 }
 /* Existing styles... */
 
-.toggle-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 1001; /* Ensure it's above other content */
-}
+
 
 .sidebar {
+    margin-top:0px;
     width: 250px;
     height: 100vh;
     background-color: #f4f4f4;
@@ -73,9 +60,6 @@ body, html {
 }
 
 
-h1, h2 {
-    color: #333;
-}
 
 .section {
     margin-top: 20px;
