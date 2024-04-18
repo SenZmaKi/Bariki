@@ -36,7 +36,7 @@
       <label for="name">Fundraiser Name:</label>
       <input type="text" id="name" name="name" placeholder="Enter your fundraiser's name" required>
   </div>
-  <div class="form-group">
+  <div class="form-group" method="POST" action="{{ url_for('create_cause', user_id=current_user.id) }}">
       <label for="description">Description:</label>
       <textarea id="description" name="description" placeholder="Give a brief description of your fundraiser" required></textarea>
   </div>
