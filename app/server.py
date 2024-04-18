@@ -34,7 +34,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def load_user(user_id):
     print('---- user loader -----')
-    data = database.session.query(User).get(user_id)
+    data = database.session.query(user).get(user_id)
     print(data)
     return data
 

@@ -20,7 +20,7 @@ class User(UserMixin, WithDonationsFields, decl_base):
     profile_pic_url = Column(String, nullable=True)
     algo_account_address = Column(String, nullable=True) # TODO change nullable to false
     bank_creds = Column(String, nullable=True)  # encrypt?
-    is_active = Column(Boolean, default=False)
+    # is_active = Column(Boolean, default=False)
     # is_authenticated = Column(Boolean, default=False)
     causes = relationship("Cause", back_populates="initiator")
     donations = relationship("Donation", back_populates="donor")  # pyright: ignore
