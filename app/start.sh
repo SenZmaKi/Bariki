@@ -1,3 +1,3 @@
 .venv/Scripts/activate.bat
-algokit localnet start
+algokit localnet start &
 python -m app

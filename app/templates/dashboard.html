@@ -28,6 +28,7 @@
         <div class="section">
             <h2>ACCOUNT</h2>
           <a href="{{ url_for('logout')}}" class="nav-item"><img src="../static/images/logout.png" style="padding: 5px;" > Logout</a>
+          <a href="{{ url_for('index') }}" class="nav-item"> Home</a>
         </div>
     </div>
     <div class="back">
@@ -53,12 +54,15 @@
     <div class="gallery">
         <div class="fundraiser-card">
             {% for c in current_user.causes %}
+            {% if c.image_url %}
               <div class="fundraiser-image">
                   <img src="{{ c.image_url }}"  alt="Fundraiser Header">
-              </div>
+              </div>c
+            {% endif %}
               <div class="fundraiser-info">
-              <h3> Name: {{ c.name }}</h3>
+              <h3> {{ c.name }}</h3>
               <p>Description: {{c.description}}</p>
+              <p>Current amount: {{ c.current_amount }}</p>
               <p>Goal Amount:{{c.goal_amount}}</p>
               <p>Deadline: {{c.deadline}}</p>
                 <p></p>

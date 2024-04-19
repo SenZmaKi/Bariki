@@ -46,9 +46,11 @@ function CarouselCardSlider() {
             key={cause.id}
             className={`card ${index === activeIndex ? "active" : ""}`}
           >
-            <img src={cause.imageUrl} alt={cause.name} />
+            {cause.img_url && (<img src={cause.imageUrl}/>)}
             <h3>{cause.name}</h3>
             <p>{cause.description}</p>
+            <p>Current amount: {cause.current_amount}</p>
+            <p>Goal amount: {cause.goal_amount}</p>
             <button onClick={() => handleDonate(cause.id)}>DONATE</button>
           </div>
         ))}
