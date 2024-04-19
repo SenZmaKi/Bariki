@@ -28,7 +28,7 @@
         <div class="section">
             <h2>ACCOUNT</h2>
           <a href="{{ url_for('logout')}}" class="nav-item"><img src="../static/images/logout.png" style="padding: 5px;" > Logout</a>
-          <a href="{{ url_for('index') }}" class="nav-item"> Home</a>
+          <a href="{{ url_for('index') }}" class="nav-item"><img src="../static/images/home.png" style="padding: 5px;" > Home</a>
         </div>
     </div>
     <div class="back">
@@ -40,7 +40,7 @@
     
         </div>
 
-          <a href="{{ url_for('create_cause', user_id=current_user.id) }}"><button class="large-button"><img src="../static/images/plus.png" style="padding: 5px;"> Create New Fundraiser</button></a>
+          <a href="{{ url_for('create_cause', user_id=current_user.id) }}" style="text-decoration: none;"><button class="large-button"><img src="../static/images/plus.png" style="padding: 5px;"> Create New Fundraiser</button></a>
     </div>
 </div>
 
@@ -51,24 +51,19 @@
     </div>
 
     {% for cause in active_causes %}
-    <div class="gallery">
-        <div class="fundraiser-card">
-            {% for c in current_user.causes %}
-            {% if c.image_url %}
-              <div class="fundraiser-image">
-                  <img src="{{ c.image_url }}"  alt="Fundraiser Header">
-              </div>c
-            {% endif %}
-              <div class="fundraiser-info">
-              <h3> Name: {{ c.name }}</h3>
-              <p>Description: {{c.description}}</p>
-              <p>Goal Amount:{{c.goal_amount}}</p>
-              <p>Deadline: {{c.deadline}}</p>
-                <p></p>
-            {% endfor %}
+    <div class="gallery card active">
+          {% if cause.image_url %}
+          <div class="fundraiser-image">
+              <img src="{{ c.image_url }}"  alt="Fundraiser Header">
+          </div>c
+        {% endif %}
+            <h3 style="margin-bottom: 15px;">{{ cause.name }}</h3>
+            <p style="margin-bottom: 15px;">{{ cause.description }}</p>
+            <div> <p>Current amount: {{ cause.current_amount }}</p></div>
+           <div><p>Goal amount: {{ cause.goal_amount }}</p></div>
+           <button >Close fundraiser</button>
+        
           </div>
-        </div>
-    </div> 
     {% endfor %}
 </div>
 </body>

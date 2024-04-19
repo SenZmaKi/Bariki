@@ -186,7 +186,12 @@ def my_fundraisers():
 def my_donations():
     """ Return all my donations"""
     my_donations = current_user.donations
-    donations = [donation.to_dict() for donation in my_donations]
+    donations = list()
+    for donation in my_donations:
+        data = {'donator': database.get(User, donation.user_id).first_name, 'amount': donation.amount,
+                'cause': database.get(Cause, donation.cause_id).name}
+        donations.append(data)
+    print(donations)
     return render_template('mydonations.html', donations=donations)
 
 @app.route('/my-account', methods=["GET", "POST"])

@@ -223,3 +223,46 @@ position: relative;
     font-size: 14px;
     line-height: 1.5;
 }
+
+.card {
+    margin: auto;
+    background-color: #db6f3c;
+    position: relative;
+    width: 320px;
+    /* margin-top: 20px; */
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    opacity: 0.5;
+    transition: opacity 0.3s ease-in-out;
+  }
+  
+  .card button{
+    display: block;
+    margin: auto;
+    background-color: #007bff; /* Example blue background color */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Top and bottom padding 10px, left and right padding 20px */
+    border-radius: 20px; /* Rounded corners */
+    cursor: pointer; /* Pointer/hand icon when mouse hovers over button */
+    font-weight: bold; /* Bold font */
+    text-transform: uppercase; /* Uppercase text */
+    margin-top: 10px; /* Margin at the top */
+    transition: background-color 0.3s ease;
+  }
+  
+  .card p{
+    text-align: center;
+  }
+  
+  .card.active {
+    opacity: 1;
+  }
+  
+  .card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+  }
