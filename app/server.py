@@ -4,7 +4,7 @@
 import os
 from pathlib import Path
 from typing import Any, TypeVar, cast
-from flask import Response, jsonify, Flask, request, redirect, url_for
+from flask import Response, jsonify, Flask, render_template_string, request, redirect, url_for
 from flask_login import (
     LoginManager,
     login_required,
@@ -131,21 +131,20 @@ def login():
     password = unwrap(request.form.get("password"))
 
     # assuming user cannot have multiple accounts with same password
-    user = (
+    users = (
         database.session.query(User)
         .filter_by(
             email=email,
         )
         .all()
-    )[0]
+    )
 
     # NOTE: It is insecure to give specific error messages i.e., telling the user
     # that the password specifically is what is invalids reveals that the email
     # exists in our database, but for better easier debugging during devt I've kept it
-    if not user:
+    if not users:
         return error_response("Invalid email"), 401
-
-    print(user.to_dict())
+    user = users[0]
     if check_password_hash(user.hashed_password, password):  # pyright: ignore
         login_user(user)
         print(current_user.is_authenticated)
